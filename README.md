@@ -113,25 +113,6 @@ Each lab boots a fresh **container**: a virtual desktop running entirely inside 
 </div>
 
 
-```mermaid
-sequenceDiagram
-    participant Host as PhishLens app (host)
-    participant Frame as Container iframe (opaque origin, CSP: no network)
-    Host->>Frame: srcdoc = inline guest runtime
-    Frame-->>Host: postMessage { kind: "ready" }
-    Host->>Frame: boot { image, containerId, nonce } + transfer MessagePort
-    loop Every learner action
-        Frame-->>Host: port.postMessage { nonce, event }
-        Host->>Host: evaluateLab(image, events) → objectives, traps, score
-    end
-    Host->>Frame: Reset → iframe destroyed, new container booted
-```
-
-Labs are **pure data** (`src/sandbox/labs/*.ts`): mailbox, threads, files, virtual web pages, DNS/WHOIS records, threat intel, scripted timeline events, objectives and traps. Objectives and traps are declarative event matchers, and the same matcher drives timeline triggers in the guest and grading in the host (`src/sandbox/match.ts`, `src/sandbox/engine.ts`), so grading is deterministic and replayable.
-
-> All people, companies, domains, phone numbers (Ofcom drama range) and IPs (RFC 5737 TEST-NET) in the labs are fictional. Because the container has no network route, nothing in a lab can reach a real site. "Malware" samples are inert descriptive strings.
-
----
 
 ## Guided Simulation Rooms
 
