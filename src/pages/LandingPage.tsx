@@ -237,9 +237,13 @@ function Hero({ hasProgress, done, onStart, onLabs }: { hasProgress: boolean; do
           transition={{ duration: 1.4, ease: EASE_OUT_EXPO, delay: 0.6 }}
           className="relative mx-auto max-w-[1080px]"
         >
-          <div className="absolute -inset-x-10 -top-10 bottom-10 rounded-[40px] bg-gradient-to-b from-brand/30 via-violet/20 to-transparent blur-3xl" aria-hidden />
-          <div className="relative rounded-[30px] border border-white/10 bg-white/[0.04] p-1.5 sm:p-2 backdrop-blur">
-            <HeroScanner />
+          <div className="absolute -inset-x-10 -top-10 bottom-10 rounded-[40px] bg-gradient-to-b from-brand/40 via-violet/30 to-transparent blur-3xl" aria-hidden />
+          {/* Rotating gradient rim so the light card glows against the night hero */}
+          <div className="relative rounded-[28px] p-[1.5px] overflow-hidden shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_50px_120px_-30px_rgba(214,69,127,0.55),0_30px_80px_-40px_rgba(123,97,255,0.6)]">
+            <div className="absolute inset-[-60%] animate-[spin_9s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0deg,#ee7eae_60deg,#7b61ff_130deg,transparent_200deg,transparent_250deg,#2ec5d3_310deg,transparent_360deg)]" aria-hidden />
+            <div className="relative rounded-[26.5px] bg-surface p-1.5 sm:p-2">
+              <HeroScanner />
+            </div>
           </div>
         </motion.div>
       </div>
