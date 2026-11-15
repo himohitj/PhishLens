@@ -6,13 +6,13 @@ import {
 } from 'lucide-react';
 import { SessionStateResponse } from '../types/phishlens.ts';
 import { getResumeRouteForSession } from '../lib/sessionStore.ts';
-import { HeroLensScene } from '../components/HeroLensScene.tsx';
+import { HeroScanner } from '../components/HeroScanner.tsx';
 import { WarmupTeaser } from '../components/WarmupTeaser.tsx';
 import { Eyebrow } from '../components/ui/Eyebrow.tsx';
 import { LEARNING_MODULES } from '../server/data.ts';
 import { LAB_IMAGES } from '../sandbox/labs/index.ts';
 import {
-  Aurora, CountUp, EASE_OUT_EXPO, Magnetic, Marquee, Reveal, SplitText, SpotlightCard, Stagger, StaggerItem, Tilt, TypingTerminal,
+  Aurora, CountUp, EASE_OUT_EXPO, Magnetic, Marquee, Reveal, SplitText, SpotlightCard, Stagger, StaggerItem, TypingTerminal,
 } from '../components/motion.tsx';
 
 interface LandingPageProps {
@@ -238,37 +238,14 @@ function Hero({ hasProgress, done, onStart, onLabs }: { hasProgress: boolean; do
           className="relative mx-auto max-w-[1080px]"
         >
           <div className="absolute -inset-x-10 -top-10 bottom-10 rounded-[40px] bg-gradient-to-b from-brand/30 via-violet/20 to-transparent blur-3xl" aria-hidden />
-          <Tilt max={3}>
-            <div className="relative rounded-[28px] border border-white/15 bg-white/[0.06] p-2 sm:p-3 shadow-[0_60px_120px_-40px_rgba(0,0,0,0.8)] backdrop-blur">
-              <div className="rounded-[20px] overflow-hidden bg-canvas text-ink">
-                <HeroLensScene />
-              </div>
-            </div>
-          </Tilt>
-          <FloatingChip className="hidden md:flex -left-10 top-[22%]" delay={1.4} icon={<Mail className="w-3.5 h-3.5" />} title="Sender mismatch" sub="northstar-verify-mail.example.net" />
-          <FloatingChip className="hidden md:flex -right-8 top-[55%]" delay={1.6} icon={<Lock className="w-3.5 h-3.5" />} title="Lookalike link" sub="decoy prefix detected" tone="warn" />
+          <div className="relative rounded-[30px] border border-white/10 bg-white/[0.04] p-1.5 sm:p-2 backdrop-blur">
+            <HeroScanner />
+          </div>
         </motion.div>
       </div>
 
       <Stats />
     </section>
-  );
-}
-
-function FloatingChip({ className, delay, icon, title, sub, tone = 'brand' }: { className: string; delay: number; icon: React.ReactNode; title: string; sub: string; tone?: 'brand' | 'warn' }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8, y: 10 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: EASE_OUT_EXPO, delay }}
-      className={`absolute z-20 items-center gap-2.5 rounded-2xl border border-white/15 bg-night-2/95 px-3.5 py-2.5 text-xs shadow-2xl animate-float ${className}`}
-    >
-      <span className={`grid place-items-center w-7 h-7 rounded-lg ${tone === 'warn' ? 'bg-amber-400/15 text-amber-300' : 'bg-brand/20 text-brand-soft'}`}>{icon}</span>
-      <span>
-        <span className="block font-semibold text-white">{title}</span>
-        <span className="block font-mono text-[10.5px] text-night-subtle">{sub}</span>
-      </span>
-    </motion.div>
   );
 }
 
