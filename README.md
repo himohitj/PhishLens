@@ -112,15 +112,6 @@ Each lab boots a fresh **container**: a virtual desktop running entirely inside 
   <p><em><strong>Debrief:</strong> animated score ring, outcome (<em>Threat neutralised</em>, <em>Compromised, then contained</em>, <em>Container compromised</em> or <em>No verdict</em>), red flags, the right move, and a timestamped replay of every action taken inside the container.</em></p>
 </div>
 
-### How the isolation works
-
-The container is enforced by the browser itself, not by trusting the lab content (`src/sandbox/ContainerHost.tsx`):
-
-- **Opaque origin.** Each container is an `<iframe sandbox="allow-scripts">`, with no `allow-same-origin`. It cannot read PhishLens cookies or `localStorage`, or touch the parent DOM. Forms, popups, modals and top-level navigation are all denied.
-- **Zero egress.** A per-container Content-Security-Policy (`default-src 'none'; connect-src 'none'; form-action 'none'; frame-src 'none'`) blocks every outbound request. The lab's "internet" is a virtual DNS, WHOIS and web defined by the lab image. Anything else is dropped and logged as `egress_blocked`.
-- **Private channel.** Host and guest talk only over a `MessagePort` handed over in a boot handshake and checked against a per-boot nonce.
-- **Actions, never values.** The guest reports what you *did* (opened headers, ran `whois`, submitted a form) and never what you *typed*. Form submissions report only which fields were filled.
-- **Disposable.** Reset destroys the iframe and boots a clean image under a new container ID. Container state lives in memory only.
 
 ```mermaid
 sequenceDiagram
