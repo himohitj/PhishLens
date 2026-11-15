@@ -184,7 +184,7 @@ export function BrowserApp() {
                   <dt>Issued to</dt><dd className="mono">{page.tls.subject}</dd>
                   <dt>Organisation</dt><dd>{page.tls.organization ?? <em>Not validated (domain-only certificate)</em>}</dd>
                   <dt>Issuer</dt><dd>{page.tls.issuer}</dd>
-                  <dt>Valid from</dt><dd>{page.tls.validFrom} <span className={page.tls.ageDays < 14 ? 'bad' : 'muted'}>({page.tls.ageDays} days old)</span></dd>
+                  <dt>Valid from</dt><dd>{page.tls.validFrom} <span className={page.tls.ageDays < 14 ? 'bad' : 'muted'}>({page.tls.ageDays} {page.tls.ageDays === 1 ? 'day' : 'days'} old)</span></dd>
                   <dt>Valid to</dt><dd>{page.tls.validTo}</dd>
                   <dt>Also covers</dt><dd className="mono">{page.tls.san.join(', ')}</dd>
                   <dd className="note">A padlock only means the connection is encrypted. It says nothing about who owns the site.</dd>

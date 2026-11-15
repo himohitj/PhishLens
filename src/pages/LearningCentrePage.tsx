@@ -48,14 +48,11 @@ export function LearningCentrePage({
     <div className="max-w-[1240px] w-full mx-auto px-4 sm:px-6 py-10 space-y-6 stagger-children">
       {/* Top Visual Index Bar: Switch between concise visual topics in 1 click */}
       <div className="bg-surface border border-line rounded-3xl p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4 shadow-soft">
-        <div className="space-y-1">
-          <div className="text-xs font-bold text-brand">
-            Embedded Visual Threat Guides · Completed {session.completedModuleSlugs.length} of{' '}
-            {modules.length}
+        <div className="space-y-0.5 shrink-0">
+          <div className="text-[11px] font-mono uppercase tracking-[0.16em] text-muted">Choose a topic</div>
+          <div className="text-sm font-semibold text-ink">
+            {session.completedModuleSlugs.length} of {modules.length} guides complete
           </div>
-          <h1 className="text-xl sm:text-2xl font-bold text-ink">
-            Spot the Signal: Annotated Examples &amp; Before/After Comparisons
-          </h1>
         </div>
 
         {/* Visual Topic Pills */}
