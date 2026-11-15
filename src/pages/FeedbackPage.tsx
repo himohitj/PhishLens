@@ -23,17 +23,17 @@ export function FeedbackPage({ scenarioId, session, navigate }: FeedbackPageProp
   if (!feedback) {
     return (
       <div className="flex-1 max-w-3xl w-full mx-auto px-6 py-14 space-y-4">
-        <div className="bg-white border border-[#F0E7ED] rounded-2xl p-6 space-y-4 shadow-xs">
-          <h1 className="text-lg font-bold text-[#24212A]">
+        <div className="bg-surface border border-line rounded-3xl p-6 space-y-4 shadow-soft">
+          <h1 className="text-lg font-bold text-ink">
             No Decision Recorded Yet for This Simulation
           </h1>
-          <p className="text-sm text-[#716B76]">
+          <p className="text-sm text-muted">
             Interact with the simulated interface first to unlock the detailed evidence debrief.
           </p>
           <button
             type="button"
             onClick={() => navigate(`/experience/simulation/${scenarioId}`)}
-            className="px-4 py-2.5 text-xs font-semibold text-white bg-[#D94F89] hover:bg-[#C23B75] rounded-xl cursor-pointer"
+            className="px-4 py-2.5 text-xs font-semibold text-white bg-brand hover:bg-brand-strong rounded-xl cursor-pointer"
           >
             Open Interactive Simulation
           </button>
@@ -52,10 +52,10 @@ export function FeedbackPage({ scenarioId, session, navigate }: FeedbackPageProp
     feedback.outcomeClassification === 'safe_partial';
 
   return (
-    <div className="flex-1 max-w-[1380px] w-full mx-auto px-6 py-8 space-y-6">
+    <div className="flex-1 max-w-[1240px] w-full mx-auto px-4 sm:px-6 py-10 space-y-6 stagger-children">
       {/* Top Result Banner */}
       <div
-        className={`rounded-2xl border p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4 ${
+        className={`rounded-3xl border p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4 ${
           isSafe
             ? 'bg-emerald-50/70 border-emerald-200 text-emerald-950'
             : 'bg-amber-50/80 border-amber-200 text-amber-950'
@@ -72,8 +72,8 @@ export function FeedbackPage({ scenarioId, session, navigate }: FeedbackPageProp
               {feedback.scenarioTitle} · Debrief &amp; Clue Breakdown
             </span>
           </div>
-          <h1 className="text-2xl font-bold text-[#24212A]">{feedback.resultHeadline}</h1>
-          <p className="text-sm text-[#24212A]/80 max-w-3xl">{feedback.actionExplanation}</p>
+          <h1 className="text-2xl font-bold text-ink">{feedback.resultHeadline}</h1>
+          <p className="text-sm text-ink/80 max-w-3xl">{feedback.actionExplanation}</p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3 shrink-0">
@@ -81,7 +81,7 @@ export function FeedbackPage({ scenarioId, session, navigate }: FeedbackPageProp
             <button
               type="button"
               onClick={() => navigate(`/experience/simulation/${nextSimId}`)}
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#D94F89] hover:bg-[#C23B75] text-white text-xs font-semibold cursor-pointer shadow-xs"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-brand hover:bg-brand-strong text-white text-xs font-semibold cursor-pointer shadow-soft"
             >
               <span>Next Simulation ({currentIdx + 2} of 5)</span>
               <ArrowRight className="w-4 h-4" />
@@ -90,7 +90,7 @@ export function FeedbackPage({ scenarioId, session, navigate }: FeedbackPageProp
             <button
               type="button"
               onClick={() => navigate('/report')}
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#D94F89] hover:bg-[#C23B75] text-white text-xs font-semibold cursor-pointer shadow-xs"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-brand hover:bg-brand-strong text-white text-xs font-semibold cursor-pointer shadow-soft"
             >
               <span>View Personal Recognition Report</span>
               <ArrowRight className="w-4 h-4" />
@@ -102,12 +102,12 @@ export function FeedbackPage({ scenarioId, session, navigate }: FeedbackPageProp
       {/* 12-Column Grid: 4-Part Debrief + Annotated Clues */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-5 space-y-4">
-          <div className="bg-white border border-[#F0E7ED] rounded-2xl p-5 space-y-3 shadow-2xs">
-            <div className="text-xs font-bold text-[#D94F89]">1. Action Comparison</div>
+          <div className="bg-surface border border-line rounded-3xl p-5 space-y-3 shadow-soft">
+            <div className="text-xs font-bold text-brand">1. Action Comparison</div>
             <div className="space-y-2 text-xs">
-              <div className="p-3 rounded-xl bg-[#FCFAFC] border border-[#F0E7ED]">
-                <div className="text-[#716B76]">Your Action:</div>
-                <div className="font-bold text-[#24212A] text-sm mt-0.5">
+              <div className="p-3 rounded-xl bg-canvas border border-line">
+                <div className="text-muted">Your Action:</div>
+                <div className="font-bold text-ink text-sm mt-0.5">
                   {feedback.selectedActionLabel}
                 </div>
               </div>
@@ -123,18 +123,18 @@ export function FeedbackPage({ scenarioId, session, navigate }: FeedbackPageProp
             </div>
           </div>
 
-          <div className="bg-[#FFF1F6] border border-[#FCE4EE] rounded-2xl p-5 space-y-2">
-            <div className="text-xs font-bold text-[#D94F89]">
+          <div className="bg-blush border border-rose-soft rounded-3xl p-5 space-y-2">
+            <div className="text-xs font-bold text-brand">
               2. Practical Rule to Remember
             </div>
-            <p className="text-sm font-medium text-[#24212A] leading-relaxed">
+            <p className="text-sm font-medium text-ink leading-relaxed">
               {feedback.preventionTip}
             </p>
             <div className="pt-2 flex items-center justify-between">
               <button
                 type="button"
                 onClick={() => navigate(`/learn/${feedback.relatedModuleSlug}`)}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#D94F89] hover:underline cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand hover:underline cursor-pointer"
               >
                 <BookOpen className="w-3.5 h-3.5" />
                 <span>Explore Visual Guide: {feedback.relatedModuleTitle}</span>
@@ -144,11 +144,11 @@ export function FeedbackPage({ scenarioId, session, navigate }: FeedbackPageProp
         </div>
 
         {/* Annotated Evidence Clues */}
-        <div className="lg:col-span-7 bg-white border border-[#F0E7ED] rounded-2xl p-6 space-y-4 shadow-2xs">
-          <div className="flex items-center justify-between border-b border-[#F0E7ED] pb-3">
+        <div className="lg:col-span-7 bg-surface border border-line rounded-3xl p-6 space-y-4 shadow-soft">
+          <div className="flex items-center justify-between border-b border-line pb-3">
             <div className="flex items-center gap-2">
-              <Eye className="w-4 h-4 text-[#D94F89]" />
-              <h2 className="text-sm font-bold text-[#24212A]">
+              <Eye className="w-4 h-4 text-brand" />
+              <h2 className="text-sm font-bold text-ink">
                 Clues Inside the Interface ({feedback.inspectedEvidenceIds.length}/
                 {feedback.missedOrSpottedEvidence.length} Inspected)
               </h2>
@@ -156,7 +156,7 @@ export function FeedbackPage({ scenarioId, session, navigate }: FeedbackPageProp
             <button
               type="button"
               onClick={() => navigate(`/experience/simulation/${scenarioId}`)}
-              className="inline-flex items-center gap-1 text-xs font-semibold text-[#D94F89] hover:underline cursor-pointer"
+              className="inline-flex items-center gap-1 text-xs font-semibold text-brand hover:underline cursor-pointer"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Re-Open Simulation</span>
@@ -167,10 +167,10 @@ export function FeedbackPage({ scenarioId, session, navigate }: FeedbackPageProp
             {feedback.missedOrSpottedEvidence.map((item) => (
               <div
                 key={item.id}
-                className="p-3.5 rounded-xl bg-[#FCFAFC] border border-[#F0E7ED] space-y-1.5 text-xs"
+                className="p-3.5 rounded-xl bg-canvas border border-line space-y-1.5 text-xs"
               >
                 <div className="flex items-center justify-between gap-2">
-                  <span className="font-bold text-[#24212A]">{item.label}</span>
+                  <span className="font-bold text-ink">{item.label}</span>
                   <span
                     className={`font-mono text-[11px] font-semibold ${
                       item.wasInspected ? 'text-emerald-700' : 'text-amber-700'
@@ -179,10 +179,10 @@ export function FeedbackPage({ scenarioId, session, navigate }: FeedbackPageProp
                     {item.wasInspected ? '✓ Inspected' : '○ Uninspected'}
                   </span>
                 </div>
-                <div className="p-2 rounded-lg bg-white border border-[#F0E7ED] font-mono text-[11px] text-[#D94F89] break-all">
+                <div className="p-2 rounded-lg bg-surface border border-line font-mono text-[11px] text-brand break-all">
                   {item.rawValue}
                 </div>
-                <p className="text-[#716B76] leading-relaxed">{item.explanation}</p>
+                <p className="text-muted leading-relaxed">{item.explanation}</p>
               </div>
             ))}
           </div>

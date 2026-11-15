@@ -111,7 +111,7 @@ export function HeroLensScene() {
       <div
         onMouseEnter={() => setIsPointerInside(true)}
         onMouseLeave={() => setIsPointerInside(false)}
-        className="relative w-full rounded-3xl bg-gradient-to-br from-[#FFFFFF] via-[#FFF6FA] to-[#FCE4EE]/65 border border-[#F0E7ED] shadow-[0_24px_60px_-18px_rgba(217,79,137,0.14),0_8px_24px_-8px_rgba(36,33,42,0.05)] overflow-hidden p-5 sm:p-7 lg:p-8"
+        className="relative w-full rounded-3xl bg-gradient-to-br from-white via-blush to-rose-soft/65 border border-line shadow-[0_24px_60px_-18px_rgba(217,79,137,0.14),0_8px_24px_-8px_rgba(36,33,42,0.05)] overflow-hidden p-5 sm:p-7 lg:p-8"
       >
         {/* Subtle Architectural Studio Grid & Soft Radial Ambient Lighting (Decorative) */}
         <div
@@ -129,17 +129,17 @@ export function HeroLensScene() {
         />
 
         {/* Top Stage Header Bar: Tagline & Status Indicator */}
-        <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 pb-4 sm:pb-5 border-b border-[#F0E7ED]/80">
+        <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 pb-4 sm:pb-5 border-b border-line/80">
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-[#FFF1F6] border border-[#FCE4EE] text-[#D94F89]">
+            <span className="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-blush border border-rose-soft text-brand">
               <Eye className="w-3.5 h-3.5" />
             </span>
-            <span className="text-xs font-semibold tracking-tight text-[#24212A]">
+            <span className="text-xs font-semibold tracking-tight text-ink">
               See through the deception
             </span>
           </div>
 
-          <div className="flex items-center gap-2 text-xs text-[#716B76]">
+          <div className="flex items-center gap-2 text-xs text-muted">
             <span>
               {senderRevealed && linkRevealed
                 ? 'Lens reveal: 2 hidden clues exposed'
@@ -177,7 +177,7 @@ export function HeroLensScene() {
             <div
               aria-hidden="true"
               style={{ transform: 'translateZ(-36px) translateY(18px) scale(0.95)' }}
-              className="pointer-events-none absolute inset-0 rounded-3xl bg-[#D94F89]/10 blur-xl"
+              className="pointer-events-none absolute inset-0 rounded-3xl bg-brand/10 blur-xl"
             />
 
             {/* Floating Background 3D Element 1: Translucent Envelope Card (Top-Left Depth Plane) */}
@@ -194,64 +194,64 @@ export function HeroLensScene() {
                   : { duration: 6.5, repeat: Infinity, ease: 'easeInOut' }
               }
               style={{ transform: 'translateZ(-22px)' }}
-              className="hidden sm:flex absolute -top-4 -left-4 z-0 items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-white/85 border border-[#FCE4EE] shadow-sm backdrop-blur-xs"
+              className="hidden sm:flex absolute -top-4 -left-4 z-0 items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-white/85 border border-rose-soft shadow-sm backdrop-blur-xs"
             >
-              <div className="w-7 h-7 rounded-xl bg-[#FFF1F6] border border-[#FCE4EE] flex items-center justify-center text-[#D94F89]">
+              <div className="w-7 h-7 rounded-xl bg-blush border border-rose-soft flex items-center justify-center text-brand">
                 <Mail className="w-3.5 h-3.5" />
               </div>
               <div className="text-[11px] leading-tight">
-                <div className="font-semibold text-[#24212A]">Incoming Message</div>
-                <div className="text-[#716B76]">Appears routine at first glance</div>
+                <div className="font-semibold text-ink">Incoming Message</div>
+                <div className="text-muted">Appears routine at first glance</div>
               </div>
             </motion.div>
 
             {/* Primary 3D Object: Fictional Message Card */}
             <div
               style={{ transform: 'translateZ(0px)' }}
-              className="relative z-10 rounded-2xl bg-white border border-[#F0E7ED] shadow-[0_18px_40px_-15px_rgba(36,33,42,0.10),0_2px_10px_-2px_rgba(217,79,137,0.08)] p-4 sm:p-6 space-y-4"
+              className="relative z-10 rounded-2xl bg-white border border-line shadow-[0_18px_40px_-15px_rgba(36,33,42,0.10),0_2px_10px_-2px_rgba(217,79,137,0.08)] p-4 sm:p-6 space-y-4"
             >
               {/* Card Window Header */}
-              <div className="flex items-center justify-between gap-2 pb-3 border-b border-[#F0E7ED]">
+              <div className="flex items-center justify-between gap-2 pb-3 border-b border-line">
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-1.5" aria-hidden="true">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#FCE4EE] border border-[#E879A8]/50" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#FFF1F6] border border-[#F0E7ED]" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#FCFAFC] border border-[#F0E7ED]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-rose-soft border border-brand-soft/50" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-blush border border-line" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-canvas border border-line" />
                   </div>
-                  <span className="text-xs font-semibold text-[#24212A] ml-1">
+                  <span className="text-xs font-semibold text-ink ml-1">
                     Shared Workspace Notice
                   </span>
                 </div>
-                <span className="text-[11px] font-mono text-[#716B76]">Today · 09:42 AM</span>
+                <span className="text-[11px] font-mono text-muted">Today · 09:42 AM</span>
               </div>
 
               {/* Clue Area 1: Sender Identity Row */}
               <div
                 className={`relative rounded-xl p-3 sm:p-3.5 border transition-all duration-500 ${
                   senderRevealed
-                    ? 'bg-[#FFF1F6]/90 border-[#D94F89] shadow-[0_8px_24px_-6px_rgba(217,79,137,0.18)]'
-                    : 'bg-[#FCFAFC] border-[#F0E7ED]'
+                    ? 'bg-blush/90 border-brand shadow-[0_8px_24px_-6px_rgba(217,79,137,0.18)]'
+                    : 'bg-canvas border-line'
                 }`}
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-xl bg-[#FCE4EE] text-[#D94F89] font-bold text-xs flex items-center justify-center shrink-0">
+                    <div className="w-8 h-8 rounded-xl bg-rose-soft text-brand font-bold text-xs flex items-center justify-center shrink-0">
                       NC
                     </div>
                     <div className="min-w-0">
-                      <div className="text-xs sm:text-sm font-bold text-[#24212A] truncate">
+                      <div className="text-xs sm:text-sm font-bold text-ink truncate">
                         Northstar Cloud Docs
                       </div>
                       <div className="text-[11px] font-mono truncate">
                         {senderRevealed ? (
-                          <span className="text-[#24212A]">
+                          <span className="text-ink">
                             notice@
-                            <span className="font-semibold text-[#D94F89] underline decoration-[#D94F89] decoration-wavy underline-offset-2">
+                            <span className="font-semibold text-brand underline decoration-brand decoration-wavy underline-offset-2">
                               northstar-verify-mail.example.net
                             </span>
                           </span>
                         ) : (
-                          <span className="text-[#716B76]">
+                          <span className="text-muted">
                             notice@northstar-verify-mail.example.net
                           </span>
                         )}
@@ -263,8 +263,8 @@ export function HeroLensScene() {
                   <div
                     className={`shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-semibold border transition-all duration-500 ${
                       senderRevealed
-                        ? 'bg-[#D94F89] text-white border-[#D94F89] opacity-100 translate-y-0'
-                        : 'bg-white text-[#716B76] border-[#F0E7ED] opacity-75'
+                        ? 'bg-brand text-white border-brand opacity-100 translate-y-0'
+                        : 'bg-white text-muted border-line opacity-75'
                     }`}
                   >
                     {senderRevealed ? (
@@ -281,23 +281,23 @@ export function HeroLensScene() {
                 {/* Expanded Lens Insight for Sender */}
                 <div
                   className={`overflow-hidden transition-all duration-500 ${
-                    senderRevealed ? 'max-h-20 opacity-100 mt-2.5 pt-2 border-t border-[#FCE4EE]' : 'max-h-0 opacity-0'
+                    senderRevealed ? 'max-h-20 opacity-100 mt-2.5 pt-2 border-t border-rose-soft' : 'max-h-0 opacity-0'
                   }`}
                 >
-                  <p className="text-[11px] text-[#24212A] leading-snug">
-                    <span className="font-semibold text-[#D94F89]">Clue 01:</span> Display name says{' '}
+                  <p className="text-[11px] text-ink leading-snug">
+                    <span className="font-semibold text-brand">Clue 01:</span> Display name says{' '}
                     <span className="font-medium">“Northstar Cloud Docs”</span>, but the domain belongs to{' '}
-                    <code className="font-mono text-[#D94F89]">northstar-verify-mail.example.net</code>.
+                    <code className="font-mono text-brand">northstar-verify-mail.example.net</code>.
                   </p>
                 </div>
               </div>
 
               {/* Calm Fictional Message Line */}
               <div className="px-1 space-y-1">
-                <div className="text-xs sm:text-sm font-semibold text-[#24212A]">
+                <div className="text-xs sm:text-sm font-semibold text-ink">
                   “Please confirm your sign-in to keep access to Q4_Team_Schedule.pdf”
                 </div>
-                <p className="text-xs text-[#716B76] leading-relaxed">
+                <p className="text-xs text-muted leading-relaxed">
                   Your shared folder session expires in 30 minutes. Use the document link below to stay signed in.
                 </p>
               </div>
@@ -306,30 +306,30 @@ export function HeroLensScene() {
               <div
                 className={`relative rounded-xl p-3 sm:p-3.5 border transition-all duration-500 ${
                   linkRevealed
-                    ? 'bg-[#FFF1F6]/95 border-[#D94F89] shadow-[0_8px_24px_-6px_rgba(217,79,137,0.18)]'
-                    : 'bg-[#FCFAFC] border-[#F0E7ED]'
+                    ? 'bg-blush/95 border-brand shadow-[0_8px_24px_-6px_rgba(217,79,137,0.18)]'
+                    : 'bg-canvas border-line'
                 }`}
               >
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-xl bg-white border border-[#F0E7ED] flex items-center justify-center text-[#24212A] shrink-0">
-                      <ExternalLink className="w-3.5 h-3.5 text-[#D94F89]" />
+                    <div className="w-8 h-8 rounded-xl bg-white border border-line flex items-center justify-center text-ink shrink-0">
+                      <ExternalLink className="w-3.5 h-3.5 text-brand" />
                     </div>
                     <div className="min-w-0">
-                      <div className="text-xs font-bold text-[#24212A] truncate">
+                      <div className="text-xs font-bold text-ink truncate">
                         Open Q4_Team_Schedule.pdf
                       </div>
                       <div className="text-[11px] font-mono truncate">
                         {linkRevealed ? (
-                          <span className="text-[#24212A]">
+                          <span className="text-ink">
                             https://northstar.example.com.
-                            <span className="font-semibold text-[#D94F89] underline decoration-[#D94F89] decoration-wavy underline-offset-2">
+                            <span className="font-semibold text-brand underline decoration-brand decoration-wavy underline-offset-2">
                               auth-check-portal.example.net
                             </span>
                             /login
                           </span>
                         ) : (
-                          <span className="text-[#716B76]">
+                          <span className="text-muted">
                             https://northstar.example.com.auth-check-portal.example.net/...
                           </span>
                         )}
@@ -340,13 +340,13 @@ export function HeroLensScene() {
                   <div
                     className={`shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-semibold border transition-all duration-500 ${
                       linkRevealed
-                        ? 'bg-[#24212A] text-white border-[#24212A]'
-                        : 'bg-white text-[#716B76] border-[#F0E7ED]'
+                        ? 'bg-ink text-white border-ink'
+                        : 'bg-white text-muted border-line'
                     }`}
                   >
                     {linkRevealed ? (
                       <>
-                        <Search className="w-3 h-3 text-[#E879A8] shrink-0" />
+                        <Search className="w-3 h-3 text-brand-soft shrink-0" />
                         <span>Disguised link</span>
                       </>
                     ) : (
@@ -358,12 +358,12 @@ export function HeroLensScene() {
                 {/* Expanded Lens Insight for Link */}
                 <div
                   className={`overflow-hidden transition-all duration-500 ${
-                    linkRevealed ? 'max-h-20 opacity-100 mt-2.5 pt-2 border-t border-[#FCE4EE]' : 'max-h-0 opacity-0'
+                    linkRevealed ? 'max-h-20 opacity-100 mt-2.5 pt-2 border-t border-rose-soft' : 'max-h-0 opacity-0'
                   }`}
                 >
-                  <p className="text-[11px] text-[#24212A] leading-snug">
-                    <span className="font-semibold text-[#D94F89]">Clue 02:</span> The real website before the first slash is{' '}
-                    <code className="font-mono text-[#D94F89]">auth-check-portal.example.net</code>, not Northstar.
+                  <p className="text-[11px] text-ink leading-snug">
+                    <span className="font-semibold text-brand">Clue 02:</span> The real website before the first slash is{' '}
+                    <code className="font-mono text-brand">auth-check-portal.example.net</code>, not Northstar.
                   </p>
                 </div>
               </div>
@@ -397,7 +397,7 @@ export function HeroLensScene() {
               {/* Soft Cast Shadow of the 3D Lens onto the Message Card */}
               <div
                 style={{ transform: 'translateZ(-24px) translateY(22px)' }}
-                className="w-40 h-40 sm:w-52 sm:h-52 rounded-full bg-[#D94F89]/15 blur-xl"
+                className="w-40 h-40 sm:w-52 sm:h-52 rounded-full bg-brand/15 blur-xl"
               />
 
               {/* Sculpted 3D Acrylic / Glass Lens Assembly */}
@@ -416,7 +416,7 @@ export function HeroLensScene() {
                 />
 
                 {/* Inner Precision Optical Reticle Ring */}
-                <div className="absolute inset-3 rounded-full border border-[#D94F89]/40" />
+                <div className="absolute inset-3 rounded-full border border-brand/40" />
                 <div className="absolute inset-6 rounded-full border border-dashed border-white/80" />
 
                 {/* Specular Glass Highlight Arc (Top-Left Refraction) */}
@@ -448,9 +448,9 @@ export function HeroLensScene() {
                 {/* Lens Handle / Floating Optical Tag */}
                 <div
                   style={{ transform: 'translateZ(12px)' }}
-                  className="absolute -bottom-3 right-0 px-3 py-1 rounded-full bg-[#24212A] text-white text-[10px] font-semibold tracking-wide shadow-md flex items-center gap-1.5 border border-[#E879A8]/50 whitespace-nowrap"
+                  className="absolute -bottom-3 right-0 px-3 py-1 rounded-full bg-ink text-white text-[10px] font-semibold tracking-wide shadow-md flex items-center gap-1.5 border border-brand-soft/50 whitespace-nowrap"
                 >
-                  <Sparkles className="w-3 h-3 text-[#E879A8]" />
+                  <Sparkles className="w-3 h-3 text-brand-soft" />
                   <span>PhishLens Optical Check</span>
                 </div>
               </div>
@@ -470,10 +470,10 @@ export function HeroLensScene() {
                   : { duration: 5.8, repeat: Infinity, ease: 'easeInOut' }
               }
               style={{ transform: 'translateZ(26px)' }}
-              className="hidden sm:flex absolute -bottom-4 right-3 z-20 items-center gap-2 px-3.5 py-2 rounded-2xl bg-white border border-[#FCE4EE] shadow-md text-xs"
+              className="hidden sm:flex absolute -bottom-4 right-3 z-20 items-center gap-2 px-3.5 py-2 rounded-2xl bg-white border border-rose-soft shadow-md text-xs"
             >
-              <CheckCircle2 className="w-4 h-4 text-[#D94F89] shrink-0" />
-              <span className="font-semibold text-[#24212A]">
+              <CheckCircle2 className="w-4 h-4 text-brand shrink-0" />
+              <span className="font-semibold text-ink">
                 Spot what ordinary interfaces hide
               </span>
             </motion.div>
@@ -481,8 +481,8 @@ export function HeroLensScene() {
         </div>
 
         {/* Optional Accessible User Controls: Inspect Specific Clue or Pause Loop */}
-        <div className="relative z-10 pt-4 border-t border-[#F0E7ED]/80 flex flex-wrap items-center justify-between gap-2">
-          <span className="text-xs font-medium text-[#716B76]">
+        <div className="relative z-10 pt-4 border-t border-line/80 flex flex-wrap items-center justify-between gap-2">
+          <span className="text-xs font-medium text-muted">
             Inspect a clue with the lens:
           </span>
 
@@ -493,10 +493,10 @@ export function HeroLensScene() {
                 setLockedFocus((prev) => (prev === 'sender' ? 'none' : 'sender'))
               }
               aria-pressed={lockedFocus === 'sender'}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D94F89] ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${
                 lockedFocus === 'sender'
-                  ? 'bg-[#D94F89] text-white'
-                  : 'bg-white hover:bg-[#FFF1F6] text-[#24212A] border border-[#F0E7ED]'
+                  ? 'bg-brand text-white'
+                  : 'bg-white hover:bg-blush text-ink border border-line'
               }`}
             >
               1. Sender Mismatch
@@ -508,10 +508,10 @@ export function HeroLensScene() {
                 setLockedFocus((prev) => (prev === 'link' ? 'none' : 'link'))
               }
               aria-pressed={lockedFocus === 'link'}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D94F89] ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${
                 lockedFocus === 'link'
-                  ? 'bg-[#D94F89] text-white'
-                  : 'bg-white hover:bg-[#FFF1F6] text-[#24212A] border border-[#F0E7ED]'
+                  ? 'bg-brand text-white'
+                  : 'bg-white hover:bg-blush text-ink border border-line'
               }`}
             >
               2. Disguised Link
@@ -524,16 +524,16 @@ export function HeroLensScene() {
                   setLockedFocus((prev) => (prev === 'both' ? 'none' : 'both'))
                 }
                 aria-pressed={lockedFocus === 'both'}
-                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium text-[#716B76] hover:text-[#24212A] bg-transparent hover:bg-white/80 transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D94F89]"
+                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium text-muted hover:text-ink bg-transparent hover:bg-white/80 transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
               >
                 {lockedFocus !== 'none' ? (
                   <>
-                    <Play className="w-3 h-3 text-[#D94F89]" />
+                    <Play className="w-3 h-3 text-brand" />
                     <span>Resume loop</span>
                   </>
                 ) : (
                   <>
-                    <Pause className="w-3 h-3 text-[#716B76]" />
+                    <Pause className="w-3 h-3 text-muted" />
                     <span>Hold all clues</span>
                   </>
                 )}

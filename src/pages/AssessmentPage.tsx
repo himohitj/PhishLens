@@ -72,8 +72,8 @@ export function AssessmentPage({ type, onComplete, navigate }: AssessmentPagePro
   if (loading) {
     return (
       <div className="flex-1 max-w-3xl w-full mx-auto px-6 py-16 flex flex-col items-center justify-center space-y-3">
-        <div className="w-7 h-7 rounded-full border-2 border-[#D94F89] border-t-transparent animate-spin" />
-        <p className="text-xs font-medium text-[#716B76]">Loading Quick Scenario Check...</p>
+        <div className="w-7 h-7 rounded-full border-2 border-brand border-t-transparent animate-spin" />
+        <p className="text-xs font-medium text-muted">Loading Quick Scenario Check...</p>
       </div>
     );
   }
@@ -85,15 +85,15 @@ export function AssessmentPage({ type, onComplete, navigate }: AssessmentPagePro
   const selectedOptionId = answers[currentQuestion.id] || '';
 
   return (
-    <div className="flex-1 max-w-4xl w-full mx-auto px-6 py-8 space-y-6">
+    <div className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-10 space-y-6 stagger-children">
       {/* Compact Header */}
-      <div className="flex flex-wrap items-center justify-between gap-2 bg-white border border-[#F0E7ED] rounded-2xl px-5 py-3.5 shadow-2xs">
+      <div className="flex flex-wrap items-center justify-between gap-2 bg-surface border border-line rounded-3xl px-5 py-3.5 shadow-soft">
         <div>
-          <div className="text-xs font-bold text-[#D94F89]">
+          <div className="text-xs font-bold text-brand">
             {type === 'baseline' ? 'Quick Starting Calibration' : 'Quick Final Check'} · Scenario{' '}
             {currentIndex + 1} of {totalQuestions}
           </div>
-          <p className="text-xs text-[#716B76]">
+          <p className="text-xs text-muted">
             {type === 'baseline'
               ? 'A 60-second check before jumping into the 5 interactive simulations.'
               : 'Compare your instincts after completing the interactive simulations.'}
@@ -103,7 +103,7 @@ export function AssessmentPage({ type, onComplete, navigate }: AssessmentPagePro
         <button
           type="button"
           onClick={() => navigate('/experience/simulation/sim-1')}
-          className="text-xs font-semibold text-[#D94F89] hover:underline cursor-pointer"
+          className="text-xs font-semibold text-brand hover:underline cursor-pointer"
         >
           Skip Straight to Simulations →
         </button>
@@ -122,31 +122,31 @@ export function AssessmentPage({ type, onComplete, navigate }: AssessmentPagePro
         initial={{ opacity: 0, y: 6 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.16 }}
-        className="bg-white border border-[#F0E7ED] rounded-2xl p-6 space-y-5 shadow-xs"
+        className="bg-surface border border-line rounded-3xl p-6 space-y-5 shadow-soft"
       >
         <div className="space-y-2">
-          <span className="text-xs font-mono text-[#D94F89] font-semibold">
+          <span className="text-xs font-mono text-brand font-semibold">
             {currentQuestion.categoryLabel}
           </span>
-          <h1 className="text-lg font-bold text-[#24212A] leading-snug">
+          <h1 className="text-lg font-bold text-ink leading-snug">
             {currentQuestion.prompt}
           </h1>
         </div>
 
         {currentQuestion.artifactSnippet && (
-          <div className="bg-[#FCFAFC] border border-[#F0E7ED] rounded-xl p-4 space-y-1.5 text-xs">
-            <div className="flex items-center justify-between text-[#716B76]">
-              <span className="font-semibold text-[#24212A] flex items-center gap-1.5">
-                <Shield className="w-3.5 h-3.5 text-[#D94F89]" />
+          <div className="bg-canvas border border-line rounded-xl p-4 space-y-1.5 text-xs">
+            <div className="flex items-center justify-between text-muted">
+              <span className="font-semibold text-ink flex items-center gap-1.5">
+                <Shield className="w-3.5 h-3.5 text-brand" />
                 <span>Artifact Preview</span>
               </span>
               {currentQuestion.artifactSnippet.sender && (
-                <span className="font-mono text-[11px] text-[#D94F89]">
+                <span className="font-mono text-[11px] text-brand">
                   {currentQuestion.artifactSnippet.sender}
                 </span>
               )}
             </div>
-            <p className="font-mono text-[#24212A] leading-relaxed">
+            <p className="font-mono text-ink leading-relaxed">
               {currentQuestion.artifactSnippet.previewText}
             </p>
           </div>
@@ -162,12 +162,12 @@ export function AssessmentPage({ type, onComplete, navigate }: AssessmentPagePro
                 onClick={() => handleSelectOption(currentQuestion.id, option.id)}
                 className={`text-left p-4 rounded-xl border transition-all cursor-pointer space-y-1 ${
                   isSelected
-                    ? 'bg-[#FFF1F6] border-[#D94F89] text-[#24212A]'
-                    : 'bg-[#FCFAFC] border-[#F0E7ED] hover:border-[#E879A8] text-[#24212A]'
+                    ? 'bg-blush border-brand text-ink'
+                    : 'bg-canvas border-line hover:border-brand-soft text-ink'
                 }`}
               >
                 <div className="text-xs font-bold leading-snug">{option.label}</div>
-                <div className="text-[11px] text-[#716B76] leading-relaxed">
+                <div className="text-[11px] text-muted leading-relaxed">
                   {option.description}
                 </div>
               </button>
@@ -175,14 +175,14 @@ export function AssessmentPage({ type, onComplete, navigate }: AssessmentPagePro
           })}
         </div>
 
-        <div className="flex items-center justify-between pt-2 border-t border-[#F0E7ED]">
+        <div className="flex items-center justify-between pt-2 border-t border-line">
           <button
             type="button"
             onClick={() => {
               if (currentIndex > 0) setCurrentIndex((p) => p - 1);
               else navigate('/');
             }}
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-[#716B76] hover:text-[#24212A] cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-muted hover:text-ink cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back</span>
@@ -193,7 +193,7 @@ export function AssessmentPage({ type, onComplete, navigate }: AssessmentPagePro
               type="button"
               disabled={!selectedOptionId}
               onClick={() => setCurrentIndex((p) => p + 1)}
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#D94F89] hover:bg-[#C23B75] disabled:opacity-40 text-white text-xs font-semibold cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-brand hover:bg-brand-strong disabled:opacity-40 text-white text-xs font-semibold cursor-pointer"
             >
               <span>Next Scenario</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -203,7 +203,7 @@ export function AssessmentPage({ type, onComplete, navigate }: AssessmentPagePro
               type="button"
               disabled={!selectedOptionId || isSubmitting}
               onClick={handleFinalSubmit}
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#D94F89] hover:bg-[#C23B75] disabled:opacity-40 text-white text-xs font-semibold cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-brand hover:bg-brand-strong disabled:opacity-40 text-white text-xs font-semibold cursor-pointer"
             >
               <CheckCircle2 className="w-3.5 h-3.5" />
               <span>

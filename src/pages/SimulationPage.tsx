@@ -672,31 +672,31 @@ export function SimulationPage({
     (currentStepIndex === stepNum - 1 && taskCompletedInCurrentStep);
 
   return (
-    <div className="flex-1 max-w-[1340px] w-full mx-auto px-6 py-8 space-y-8">
+    <div className="flex-1 max-w-[1280px] w-full mx-auto px-4 sm:px-6 py-8 space-y-8 stagger-children">
       {/* =======================================================================
           1. ROOM BRIEFING & PROGRESS HEADER
          ======================================================================= */}
-      <section className="bg-white border border-[#F0E7ED] rounded-2xl p-6 shadow-2xs space-y-5">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-[#F0E7ED] pb-4">
+      <section className="bg-surface border border-line rounded-3xl p-6 shadow-soft space-y-5">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-line pb-4">
           <div className="space-y-1">
             <div className="flex flex-wrap items-center gap-2.5 text-xs">
-              <span className="font-bold text-[#D94F89] uppercase tracking-wider">
+              <span className="font-bold text-brand uppercase tracking-wider">
                 {room.roomCode}
               </span>
-              <span className="text-[#716B76]">·</span>
-              <span className="inline-flex items-center gap-1 text-[#716B76]">
+              <span className="text-muted">·</span>
+              <span className="inline-flex items-center gap-1 text-muted">
                 <Clock className="w-3.5 h-3.5" />
                 <span>Estimated time: {room.durationLabel}</span>
               </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#24212A]">
+            <h1 className="text-2xl sm:text-3xl font-bold text-ink">
               {room.roomTitle}
             </h1>
           </div>
 
           {/* Room Task Progress Pill & Collapsible Evidence Log Toggle */}
           <div className="flex flex-wrap items-center gap-3 shrink-0">
-            <div className="px-3.5 py-2 rounded-xl bg-[#FFF1F6] border border-[#FCE4EE] text-xs font-semibold text-[#D94F89]">
+            <div className="px-3.5 py-2 rounded-xl bg-blush border border-rose-soft text-xs font-semibold text-brand">
               {isRevealStage
                 ? `Room Completed (${totalTasks} of ${totalTasks} Tasks Done)`
                 : `Current Progress: Task ${currentTask.stepNumber} of ${totalTasks}`}
@@ -705,9 +705,9 @@ export function SimulationPage({
             <button
               type="button"
               onClick={() => setEvidenceLogOpen((prev) => !prev)}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#FCFAFC] border border-[#F0E7ED] hover:border-[#E879A8] text-xs font-semibold text-[#24212A] cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-canvas border border-line hover:border-brand-soft text-xs font-semibold text-ink cursor-pointer"
             >
-              <Eye className="w-3.5 h-3.5 text-[#D94F89]" />
+              <Eye className="w-3.5 h-3.5 text-brand" />
               <span>Evidence Log ({inspectedIds.length})</span>
               {evidenceLogOpen ? (
                 <ChevronUp className="w-3.5 h-3.5" />
@@ -719,7 +719,7 @@ export function SimulationPage({
         </div>
 
         {/* Short Situation Premise */}
-        <p className="text-sm sm:text-base text-[#24212A] leading-relaxed max-w-4xl">
+        <p className="text-sm sm:text-base text-ink leading-relaxed max-w-4xl">
           {room.briefing}
         </p>
 
@@ -742,10 +742,10 @@ export function SimulationPage({
                 }}
                 className={`text-left p-3.5 rounded-xl border transition-all flex items-start gap-3 ${
                   isCurrent
-                    ? 'bg-[#FFF1F6] border-[#D94F89] shadow-2xs cursor-pointer'
+                    ? 'bg-blush border-brand shadow-soft cursor-pointer'
                     : isDone
                     ? 'bg-emerald-50/50 border-emerald-200 hover:bg-emerald-50 cursor-pointer'
-                    : 'bg-[#FCFAFC] border-[#F0E7ED] opacity-65 cursor-not-allowed'
+                    : 'bg-canvas border-line opacity-65 cursor-not-allowed'
                 }`}
               >
                 <div
@@ -753,17 +753,17 @@ export function SimulationPage({
                     isDone
                       ? 'bg-emerald-600 text-white'
                       : isCurrent
-                      ? 'bg-[#D94F89] text-white'
-                      : 'bg-[#F0E7ED] text-[#716B76]'
+                      ? 'bg-brand text-white'
+                      : 'bg-line text-muted'
                   }`}
                 >
                   {isDone ? '✓' : t.stepNumber}
                 </div>
                 <div className="space-y-0.5 min-w-0">
-                  <div className="text-[11px] font-mono text-[#716B76]">
+                  <div className="text-[11px] font-mono text-muted">
                     Task {t.stepNumber}
                   </div>
-                  <div className="text-xs font-bold text-[#24212A] truncate">
+                  <div className="text-xs font-bold text-ink truncate">
                     {t.title}
                   </div>
                 </div>
@@ -782,16 +782,16 @@ export function SimulationPage({
               transition={{ duration: 0.18 }}
               className="overflow-hidden"
             >
-              <div className="mt-2 p-4 rounded-xl bg-[#FCFAFC] border border-[#F0E7ED] space-y-2 text-xs">
-                <div className="font-bold text-[#24212A]">
+              <div className="mt-2 p-4 rounded-xl bg-canvas border border-line space-y-2 text-xs">
+                <div className="font-bold text-ink">
                   Clues Discovered So Far in {room.roomTitle}:
                 </div>
                 {inspectedIds.length === 0 ? (
-                  <p className="text-[#716B76]">
+                  <p className="text-muted">
                     No clues recorded yet. Complete Task 1 below to log your first discovery.
                   </p>
                 ) : (
-                  <ul className="space-y-1.5 text-[#24212A]">
+                  <ul className="space-y-1.5 text-ink">
                     {room.tasks
                       .filter(
                         (t) =>
@@ -826,36 +826,36 @@ export function SimulationPage({
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.18 }}
-              className="bg-white border-2 border-[#E879A8] rounded-2xl p-6 shadow-sm space-y-5"
+              className="bg-surface border-2 border-brand-soft rounded-3xl p-6 shadow-sm space-y-5"
             >
               {/* Current Task Header */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#D94F89]">
+                  <span className="text-xs font-bold uppercase tracking-wider text-brand">
                     Task {currentTask.stepNumber} of {totalTasks}
                   </span>
                   <button
                     type="button"
                     onClick={() => setShowHint((prev) => !prev)}
-                    className="inline-flex items-center gap-1 text-xs font-medium text-[#716B76] hover:text-[#D94F89] cursor-pointer"
+                    className="inline-flex items-center gap-1 text-xs font-medium text-muted hover:text-brand cursor-pointer"
                   >
                     <HelpCircle className="w-3.5 h-3.5" />
                     <span>{showHint ? 'Hide Hint' : 'Need a hint?'}</span>
                   </button>
                 </div>
 
-                <h2 className="text-xl font-bold text-[#24212A]">
+                <h2 className="text-xl font-bold text-ink">
                   {currentTask.title}
                 </h2>
-                <p className="text-sm text-[#24212A] leading-relaxed">
+                <p className="text-sm text-ink leading-relaxed">
                   {currentTask.instruction}
                 </p>
               </div>
 
               {/* Optional Nudge Hint */}
               {showHint && (
-                <div className="p-3.5 rounded-xl bg-[#FFF1F6] border border-[#FCE4EE] text-xs text-[#24212A]">
-                  <strong className="text-[#D94F89]">Where to look: </strong>
+                <div className="p-3.5 rounded-xl bg-blush border border-rose-soft text-xs text-ink">
+                  <strong className="text-brand">Where to look: </strong>
                   {currentTask.hintText}
                 </div>
               )}
@@ -864,8 +864,8 @@ export function SimulationPage({
               {currentStepIndex < totalTasks - 1 ? (
                 <div className="space-y-4 pt-1">
                   {!taskCompletedInCurrentStep ? (
-                    <div className="p-4 rounded-xl bg-[#FCFAFC] border border-dashed border-[#E879A8] flex items-center gap-3 text-xs text-[#24212A]">
-                      <Search className="w-4 h-4 text-[#D94F89] shrink-0" />
+                    <div className="p-4 rounded-xl bg-canvas border border-dashed border-brand-soft flex items-center gap-3 text-xs text-ink">
+                      <Search className="w-4 h-4 text-brand shrink-0" />
                       <span className="font-medium">
                         {currentTask.interactionPrompt}
                       </span>
@@ -910,7 +910,7 @@ export function SimulationPage({
                           </button>
 
                           {showWhyItMatters && (
-                            <p className="mt-2 p-3 rounded-lg bg-white/90 border border-emerald-200 text-[#24212A] leading-relaxed">
+                            <p className="mt-2 p-3 rounded-lg bg-surface/90 border border-emerald-200 text-ink leading-relaxed">
                               {currentTask.whyItMattersDetail}
                             </p>
                           )}
@@ -920,7 +920,7 @@ export function SimulationPage({
                       <button
                         type="button"
                         onClick={handleAdvanceToNextTask}
-                        className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#D94F89] hover:bg-[#C23B75] text-white text-xs font-semibold cursor-pointer shadow-xs"
+                        className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-brand hover:bg-brand-strong text-white text-xs font-semibold cursor-pointer shadow-soft"
                       >
                         <span>Continue to Task {currentTask.stepNumber + 1}</span>
                         <ArrowRight className="w-4 h-4" />
@@ -930,8 +930,8 @@ export function SimulationPage({
                 </div>
               ) : (
                 /* IF THIS IS THE FINAL DECISION TASK IN THE ROOM */
-                <div className="space-y-3 pt-2 border-t border-[#F0E7ED]">
-                  <div className="text-xs font-bold text-[#24212A]">
+                <div className="space-y-3 pt-2 border-t border-line">
+                  <div className="text-xs font-bold text-ink">
                     Choose your action:
                   </div>
                   {getRoomDecisionOptions().map((opt) => (
@@ -940,13 +940,13 @@ export function SimulationPage({
                       type="button"
                       disabled={isSubmitting}
                       onClick={() => handleDecisionSubmit(opt.id)}
-                      className="w-full text-left p-4 rounded-xl border bg-[#FCFAFC] border-[#F0E7ED] hover:bg-[#FFF1F6]/60 hover:border-[#D94F89] transition-all cursor-pointer space-y-1 group"
+                      className="w-full text-left p-4 rounded-xl border bg-canvas border-line hover:bg-blush/60 hover:border-brand transition-all cursor-pointer space-y-1 group"
                     >
-                      <div className="text-xs font-bold text-[#24212A] group-hover:text-[#D94F89] flex items-center justify-between transition-colors">
+                      <div className="text-xs font-bold text-ink group-hover:text-brand flex items-center justify-between transition-colors">
                         <span>{opt.label}</span>
-                        <ArrowRight className="w-3.5 h-3.5 text-[#716B76] group-hover:text-[#D94F89] group-hover:translate-x-0.5 transition-all shrink-0" />
+                        <ArrowRight className="w-3.5 h-3.5 text-muted group-hover:text-brand group-hover:translate-x-0.5 transition-all shrink-0" />
                       </div>
-                      <p className="text-xs text-[#716B76] leading-relaxed">
+                      <p className="text-xs text-muted leading-relaxed">
                         {opt.desc}
                       </p>
                     </button>
@@ -960,26 +960,26 @@ export function SimulationPage({
               <motion.div
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white border-2 border-[#E879A8] rounded-2xl p-6 shadow-sm space-y-4"
+                className="bg-surface border-2 border-brand-soft rounded-3xl p-6 shadow-sm space-y-4"
               >
-                <div className="flex items-center gap-2 text-xs font-bold text-[#D94F89] uppercase tracking-wider">
+                <div className="flex items-center gap-2 text-xs font-bold text-brand uppercase tracking-wider">
                   <Sparkles className="w-4 h-4" />
                   <span>Room Mission Complete</span>
                 </div>
 
-                <h2 className="text-xl font-bold text-[#24212A]">
+                <h2 className="text-xl font-bold text-ink">
                   {savedFeedback.resultHeadline}
                 </h2>
 
-                <p className="text-sm text-[#716B76] leading-relaxed">
+                <p className="text-sm text-muted leading-relaxed">
                   {savedFeedback.actionExplanation}
                 </p>
 
-                <div className="p-4 rounded-xl bg-[#FFF1F6] border border-[#FCE4EE] space-y-1 text-xs">
-                  <div className="font-bold text-[#D94F89]">
+                <div className="p-4 rounded-xl bg-blush border border-rose-soft space-y-1 text-xs">
+                  <div className="font-bold text-brand">
                     Practical Rule to Remember:
                   </div>
-                  <p className="text-[#24212A] font-medium leading-relaxed">
+                  <p className="text-ink font-medium leading-relaxed">
                     {room.revealSummary.practicalRule}
                   </p>
                 </div>
@@ -989,7 +989,7 @@ export function SimulationPage({
                     <button
                       type="button"
                       onClick={() => navigate(`/experience/simulation/${nextRoomId}`)}
-                      className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-5 rounded-xl bg-[#D94F89] hover:bg-[#C23B75] text-white text-sm font-semibold cursor-pointer shadow-xs"
+                      className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-5 rounded-xl bg-brand hover:bg-brand-strong text-white text-sm font-semibold cursor-pointer shadow-soft"
                     >
                       <span>Continue to Next Room ({roomIndex + 2} of 5)</span>
                       <ArrowRight className="w-4 h-4" />
@@ -998,7 +998,7 @@ export function SimulationPage({
                     <button
                       type="button"
                       onClick={() => navigate('/report')}
-                      className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-5 rounded-xl bg-[#D94F89] hover:bg-[#C23B75] text-white text-sm font-semibold cursor-pointer shadow-xs"
+                      className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-5 rounded-xl bg-brand hover:bg-brand-strong text-white text-sm font-semibold cursor-pointer shadow-soft"
                     >
                       <span>All 5 Rooms Complete — View My Report</span>
                       <ArrowRight className="w-4 h-4" />
@@ -1008,7 +1008,7 @@ export function SimulationPage({
                   <button
                     type="button"
                     onClick={handleReplayRoom}
-                    className="w-full inline-flex items-center justify-center gap-1.5 py-2 text-xs font-medium text-[#716B76] hover:text-[#24212A] cursor-pointer"
+                    className="w-full inline-flex items-center justify-center gap-1.5 py-2 text-xs font-medium text-muted hover:text-ink cursor-pointer"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                     <span>Replay This Room Step by Step</span>
@@ -1025,19 +1025,19 @@ export function SimulationPage({
               ROOM 01: EMAIL INBOX MOCKUP
              =================================================================== */}
           {scenarioId === 'sim-1' && (
-            <div className="bg-white border border-[#F0E7ED] rounded-2xl shadow-sm overflow-hidden">
-              <div className="bg-[#FCFAFC] border-b border-[#F0E7ED] px-5 py-3 flex items-center justify-between text-xs">
-                <div className="flex items-center gap-2 font-bold text-[#24212A]">
-                  <Mail className="w-4 h-4 text-[#D94F89]" />
+            <div className="bg-surface border border-line rounded-3xl shadow-sm overflow-hidden">
+              <div className="bg-canvas border-b border-line px-5 py-3 flex items-center justify-between text-xs">
+                <div className="flex items-center gap-2 font-bold text-ink">
+                  <Mail className="w-4 h-4 text-brand" />
                   <span>Northstar Workspace Mail</span>
                 </div>
-                <span className="text-[#716B76]">Interactive Mail Environment</span>
+                <span className="text-muted">Interactive Mail Environment</span>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-12 divide-y md:divide-y-0 md:divide-x divide-[#F0E7ED]">
+              <div className="grid grid-cols-1 md:grid-cols-12 divide-y md:divide-y-0 md:divide-x divide-line">
                 {/* Left Inbox List */}
-                <div className="md:col-span-4 bg-[#FCFAFC]/60 p-3 space-y-2">
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#716B76] px-1">
+                <div className="md:col-span-4 bg-canvas/60 p-3 space-y-2">
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-muted px-1">
                     Inbox (3)
                   </div>
                   {INBOX_MESSAGES.map((m) => {
@@ -1056,25 +1056,25 @@ export function SimulationPage({
                         }}
                         className={`w-full text-left p-3 rounded-xl border transition-all cursor-pointer space-y-1 ${
                           isSelected
-                            ? 'bg-white border-[#D94F89] shadow-2xs'
+                            ? 'bg-surface border-brand shadow-soft'
                             : highlightForTask1
-                            ? 'bg-[#FFF1F6] border-[#E879A8] hover:border-[#D94F89]'
-                            : 'bg-white/60 border-transparent hover:bg-white'
+                            ? 'bg-blush border-brand-soft hover:border-brand'
+                            : 'bg-surface/60 border-transparent hover:bg-surface'
                         }`}
                       >
                         <div className="flex items-center justify-between gap-1">
-                          <span className="text-xs font-bold text-[#24212A] truncate">
+                          <span className="text-xs font-bold text-ink truncate">
                             {m.senderName}
                           </span>
-                          <span className="text-[10px] font-mono text-[#716B76] shrink-0">
+                          <span className="text-[10px] font-mono text-muted shrink-0">
                             {m.time}
                           </span>
                         </div>
-                        <div className="text-xs font-medium text-[#24212A] line-clamp-1">
+                        <div className="text-xs font-medium text-ink line-clamp-1">
                           {m.subject}
                         </div>
                         {m.isTask && (
-                          <div className="text-[11px] font-semibold text-[#D94F89] pt-0.5">
+                          <div className="text-[11px] font-semibold text-brand pt-0.5">
                             ● Flagged Security Alert
                           </div>
                         )}
@@ -1087,26 +1087,26 @@ export function SimulationPage({
                 <div className="md:col-span-8 p-6 space-y-5">
                   {selectedInboxId !== 'msg-suspicious' ? (
                     <div className="py-12 text-center space-y-2">
-                      <p className="text-sm font-semibold text-[#24212A]">
+                      <p className="text-sm font-semibold text-ink">
                         Routine Colleague Email Selected
                       </p>
-                      <p className="text-xs text-[#716B76] max-w-sm mx-auto leading-relaxed">
+                      <p className="text-xs text-muted max-w-sm mx-auto leading-relaxed">
                         This message is a normal internal note. For Task 1, click the flagged alert from <strong>Northstar Security Operations</strong> at the top of the inbox list on the left.
                       </p>
                     </div>
                   ) : (
                     <div className="space-y-5">
-                      <div className="border-b border-[#F0E7ED] pb-4 space-y-3">
-                        <h3 className="text-base font-bold text-[#24212A] leading-snug">
+                      <div className="border-b border-line pb-4 space-y-3">
+                        <h3 className="text-base font-bold text-ink leading-snug">
                           [ACTION REQUIRED] Unverified Sign-In — Suspension in 2 Hours
                         </h3>
 
                         <div className="flex flex-wrap items-center justify-between gap-2">
                           <div className="text-xs">
-                            <div className="font-bold text-[#24212A]">
+                            <div className="font-bold text-ink">
                               Northstar Security Operations
                             </div>
-                            <div className="text-[#716B76]">
+                            <div className="text-muted">
                               To: alex.rivera@northstar.example.com
                             </div>
                           </div>
@@ -1121,8 +1121,8 @@ export function SimulationPage({
                               }}
                               className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
                                 isStepReached(2)
-                                  ? 'bg-[#FFF1F6] border-[#D94F89] text-[#D94F89]'
-                                  : 'bg-[#D94F89] text-white border-[#D94F89] shadow-xs'
+                                  ? 'bg-blush border-brand text-brand'
+                                  : 'bg-brand text-white border-brand shadow-soft'
                               }`}
                             >
                               <Search className="w-3.5 h-3.5" />
@@ -1140,16 +1140,16 @@ export function SimulationPage({
                           <motion.div
                             initial={{ opacity: 0, y: -4 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="p-3.5 rounded-xl bg-[#FFF1F6] border border-[#FCE4EE] font-mono text-xs space-y-1 text-[#24212A]"
+                            className="p-3.5 rounded-xl bg-blush border border-rose-soft font-mono text-xs space-y-1 text-ink"
                           >
                             <div>
-                              <span className="text-[#716B76]">Actual From Address:</span>{' '}
-                              <span className="font-bold text-[#D94F89]">
+                              <span className="text-muted">Actual From Address:</span>{' '}
+                              <span className="font-bold text-brand">
                                 security-noreply@northstar-id-verify.example.com
                               </span>
                             </div>
                             <div>
-                              <span className="text-[#716B76]">Reply-To Address:</span>{' '}
+                              <span className="text-muted">Reply-To Address:</span>{' '}
                               <span className="font-bold text-amber-800">
                                 support-ticket-882@external-mail-relay.example.net
                               </span>
@@ -1159,15 +1159,15 @@ export function SimulationPage({
                       </div>
 
                       {/* Email Body */}
-                      <div className="space-y-3 text-sm text-[#24212A] leading-relaxed">
+                      <div className="space-y-3 text-sm text-ink leading-relaxed">
                         <p>
                           Our protection system detected an unrecognized sign-in attempt on your Northstar Workspace profile.
                         </p>
                         <p
                           className={`p-3.5 rounded-xl border transition-colors ${
                             isStepReached(1)
-                              ? 'bg-[#FFF1F6]/60 border-[#FCE4EE]'
-                              : 'bg-[#FCFAFC] border-[#F0E7ED]'
+                              ? 'bg-blush/60 border-rose-soft'
+                              : 'bg-canvas border-line'
                           }`}
                         >
                           Failure to complete identity validation within{' '}
@@ -1178,7 +1178,7 @@ export function SimulationPage({
                       {/* Task 3 Control: Preview Link Destination */}
                       <div className="pt-2 space-y-3">
                         <div className="flex flex-wrap items-center gap-3">
-                          <span className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#24212A] text-white text-xs font-semibold select-none">
+                          <span className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-ink text-white text-xs font-semibold select-none">
                             <span>Keep My Account Active →</span>
                           </span>
 
@@ -1188,8 +1188,8 @@ export function SimulationPage({
                               onClick={() => handleCompleteInvestigationTask('ev-1-link')}
                               className={`inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
                                 isStepReached(3)
-                                  ? 'bg-[#FFF1F6] border-[#D94F89] text-[#D94F89]'
-                                  : 'bg-[#D94F89] text-white border-[#D94F89] shadow-xs'
+                                  ? 'bg-blush border-brand text-brand'
+                                  : 'bg-brand text-white border-brand shadow-soft'
                               }`}
                             >
                               <Search className="w-3.5 h-3.5" />
@@ -1206,9 +1206,9 @@ export function SimulationPage({
                           <motion.div
                             initial={{ opacity: 0, y: -4 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="p-3.5 rounded-xl bg-[#24212A] text-white font-mono text-xs space-y-1"
+                            className="p-3.5 rounded-xl bg-ink text-white font-mono text-xs space-y-1"
                           >
-                            <div className="text-[#FCE4EE] font-sans text-[11px]">
+                            <div className="text-rose-soft font-sans text-[11px]">
                               Link Preview (Look right before the first single slash /):
                             </div>
                             <div className="break-all">
@@ -1232,9 +1232,9 @@ export function SimulationPage({
               ROOM 02: BROWSER LOGIN MOCKUP ("The Suspicious Sign-In")
              =================================================================== */}
           {scenarioId === 'sim-2' && (
-            <div className="bg-white border border-[#F0E7ED] rounded-2xl shadow-sm overflow-hidden">
+            <div className="bg-surface border border-line rounded-3xl shadow-sm overflow-hidden">
               {/* Browser Window Top Bar */}
-              <div className="bg-[#24212A] text-white p-4 space-y-3">
+              <div className="bg-ink text-white p-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-rose-400" />
@@ -1258,7 +1258,7 @@ export function SimulationPage({
                   }}
                   className={`w-full text-left px-3.5 py-2.5 rounded-xl bg-slate-900 border transition-all cursor-pointer flex items-center justify-between gap-3 ${
                     currentStepIndex === 0 && !taskCompletedInCurrentStep
-                      ? 'border-[#E879A8] ring-2 ring-[#D94F89]/40'
+                      ? 'border-brand-soft ring-2 ring-brand/40'
                       : 'border-slate-700 hover:border-slate-500'
                   }`}
                 >
@@ -1282,7 +1282,7 @@ export function SimulationPage({
                     )}
                   </div>
 
-                  <span className="text-[11px] font-sans font-semibold text-[#E879A8] shrink-0">
+                  <span className="text-[11px] font-sans font-semibold text-brand-soft shrink-0">
                     {isStepReached(1) ? 'Inspected ✓' : 'Click to Inspect Address'}
                   </span>
                 </button>
@@ -1310,16 +1310,16 @@ export function SimulationPage({
               </div>
 
               {/* Simulated Sign-In Page Body */}
-              <div className="p-8 bg-[#FCFAFC]">
-                <div className="max-w-md mx-auto bg-white border border-[#F0E7ED] rounded-2xl p-6 shadow-xs space-y-5">
+              <div className="p-8 bg-canvas">
+                <div className="max-w-md mx-auto bg-surface border border-line rounded-3xl p-6 shadow-soft space-y-5">
                   <div className="text-center space-y-1">
-                    <div className="text-xs font-bold tracking-wider text-[#716B76]">
+                    <div className="text-xs font-bold tracking-wider text-muted">
                       NORTHSTAR WORKSPACE
                     </div>
-                    <h3 className="text-lg font-bold text-[#24212A]">
+                    <h3 className="text-lg font-bold text-ink">
                       Sign in to open “Q4_Product_Roadmap.pdf”
                     </h3>
-                    <p className="text-xs text-[#716B76]">
+                    <p className="text-xs text-muted">
                       Account: alex.rivera@northstar.example.com
                     </p>
                   </div>
@@ -1333,32 +1333,32 @@ export function SimulationPage({
                     }}
                     className={`p-4 rounded-xl border transition-all space-y-3 ${
                       currentStepIndex === 1 && !taskCompletedInCurrentStep
-                        ? 'bg-[#FFF1F6] border-[#D94F89] ring-2 ring-[#D94F89]/25 cursor-pointer'
+                        ? 'bg-blush border-brand ring-2 ring-brand/25 cursor-pointer'
                         : currentStepIndex >= 1
-                        ? 'bg-[#FCFAFC] border-[#E879A8] cursor-pointer'
-                        : 'bg-[#FCFAFC] border-[#F0E7ED]'
+                        ? 'bg-canvas border-brand-soft cursor-pointer'
+                        : 'bg-canvas border-line'
                     }`}
                   >
                     <div className="space-y-1">
-                      <div className="text-xs font-semibold text-[#24212A]">
+                      <div className="text-xs font-semibold text-ink">
                         1. Workspace Password
                       </div>
-                      <div className="px-3 py-2 rounded-lg bg-white border border-[#F0E7ED] text-xs font-mono text-[#716B76]">
+                      <div className="px-3 py-2 rounded-lg bg-surface border border-line text-xs font-mono text-muted">
                         •••••••••••••••• (Simulated Field)
                       </div>
                     </div>
 
                     <div className="space-y-1">
-                      <div className="text-xs font-semibold text-[#24212A]">
+                      <div className="text-xs font-semibold text-ink">
                         2. 6-Digit Authenticator Code (Requested on Same Screen)
                       </div>
-                      <div className="px-3 py-2 rounded-lg bg-white border border-[#F0E7ED] text-xs font-mono text-[#716B76]">
+                      <div className="px-3 py-2 rounded-lg bg-surface border border-line text-xs font-mono text-muted">
                         [ Enter 6-digit code from your phone app ]
                       </div>
                     </div>
 
                     {currentStepIndex >= 1 && (
-                      <div className="pt-1 flex items-center justify-between text-xs font-semibold text-[#D94F89]">
+                      <div className="pt-1 flex items-center justify-between text-xs font-semibold text-brand">
                         <span>
                           {isStepReached(2)
                             ? 'Sign-In Request Inspected ✓'
@@ -1372,9 +1372,9 @@ export function SimulationPage({
                       <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="p-3 rounded-lg bg-[#FFF1F6] border border-[#FCE4EE] text-xs text-[#24212A] leading-relaxed"
+                        className="p-3 rounded-lg bg-blush border border-rose-soft text-xs text-ink leading-relaxed"
                       >
-                        <strong className="text-[#D94F89]">Warning Sign:</strong> This page asks for your password AND a 6-digit one-time code at the same time. Legitimate sign-in screens verify your password first before asking for a second-step code.
+                        <strong className="text-brand">Warning Sign:</strong> This page asks for your password AND a 6-digit one-time code at the same time. Legitimate sign-in screens verify your password first before asking for a second-step code.
                       </motion.div>
                     )}
                   </div>
@@ -1387,8 +1387,8 @@ export function SimulationPage({
               ROOM 03: MOBILE SMS MOCKUP ("Your Delivery Is On Hold")
              =================================================================== */}
           {scenarioId === 'sim-3' && (
-            <div className="bg-white border border-[#F0E7ED] rounded-2xl shadow-sm p-6">
-              <div className="max-w-md mx-auto border border-[#F0E7ED] rounded-2xl overflow-hidden bg-[#FCFAFC] shadow-xs">
+            <div className="bg-surface border border-line rounded-3xl shadow-sm p-6">
+              <div className="max-w-md mx-auto border border-line rounded-3xl overflow-hidden bg-canvas shadow-soft">
                 {/* Task 1 Target: Phone Sender Header */}
                 <button
                   type="button"
@@ -1396,37 +1396,37 @@ export function SimulationPage({
                     handleCompleteInvestigationTask('ev-3-number');
                     onInspectEvidence('sim-3', 'ev-3-fee');
                   }}
-                  className={`w-full text-left bg-white border-b px-4 py-3.5 flex items-center justify-between transition-all cursor-pointer ${
+                  className={`w-full text-left bg-surface border-b px-4 py-3.5 flex items-center justify-between transition-all cursor-pointer ${
                     currentStepIndex === 0 && !taskCompletedInCurrentStep
-                      ? 'border-[#D94F89] bg-[#FFF1F6]/60'
-                      : 'border-[#F0E7ED]'
+                      ? 'border-brand bg-blush/60'
+                      : 'border-line'
                   }`}
                 >
                   <div className="flex items-center gap-2.5">
-                    <Smartphone className="w-4 h-4 text-[#D94F89]" />
+                    <Smartphone className="w-4 h-4 text-brand" />
                     <div>
-                      <div className="text-xs font-bold font-mono text-[#24212A]">
+                      <div className="text-xs font-bold font-mono text-ink">
                         +1 (555) 017-8392
                       </div>
-                      <div className="text-[11px] text-[#716B76]">
+                      <div className="text-[11px] text-muted">
                         Unknown Sender · Not in Contacts
                       </div>
                     </div>
                   </div>
-                  <span className="text-xs font-semibold text-[#D94F89]">
+                  <span className="text-xs font-semibold text-brand">
                     {isStepReached(1) ? 'Sender Inspected ✓' : 'Tap to Inspect Sender'}
                   </span>
                 </button>
 
                 {isStepReached(1) && (
-                  <div className="px-4 py-2.5 bg-[#FFF1F6] border-b border-[#FCE4EE] text-xs text-[#24212A]">
-                    <strong className="text-[#D94F89]">Clue #1:</strong> Sent from an ordinary 10-digit phone number, asking for a tiny <strong>$1.85 fee</strong> to get your credit card details.
+                  <div className="px-4 py-2.5 bg-blush border-b border-rose-soft text-xs text-ink">
+                    <strong className="text-brand">Clue #1:</strong> Sent from an ordinary 10-digit phone number, asking for a tiny <strong>$1.85 fee</strong> to get your credit card details.
                   </div>
                 )}
 
                 {/* SMS Bubble */}
                 <div className="p-5 space-y-4">
-                  <div className="bg-white border border-[#F0E7ED] rounded-2xl rounded-tl-xs p-4 space-y-3 text-sm text-[#24212A] leading-relaxed shadow-2xs">
+                  <div className="bg-surface border border-line rounded-3xl rounded-tl-xs p-4 space-y-3 text-sm text-ink leading-relaxed shadow-soft">
                     <p>
                       <strong>SwiftPost Express:</strong> Delivery attempt #2 failed for parcel SP-904182 due to an unreadable street label.
                     </p>
@@ -1444,8 +1444,8 @@ export function SimulationPage({
                       }}
                       className={`w-full text-left p-3 rounded-xl border font-mono text-xs transition-all cursor-pointer break-all ${
                         currentStepIndex === 1 && !taskCompletedInCurrentStep
-                          ? 'bg-[#FFF1F6] border-[#D94F89] text-[#D94F89] ring-2 ring-[#D94F89]/25'
-                          : 'bg-[#FCFAFC] border-[#F0E7ED] text-[#D94F89]'
+                          ? 'bg-blush border-brand text-brand ring-2 ring-brand/25'
+                          : 'bg-canvas border-line text-brand'
                       }`}
                     >
                       https://swiftpost-parcel-redelivery.example.org/claim-id-492
@@ -1456,7 +1456,7 @@ export function SimulationPage({
                     <motion.div
                       initial={{ opacity: 0, y: -4 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="p-3.5 rounded-xl bg-[#24212A] text-white text-xs space-y-1"
+                      className="p-3.5 rounded-xl bg-ink text-white text-xs space-y-1"
                     >
                       <div className="text-amber-300 font-semibold">
                         Link Preview Inspection:
@@ -1475,19 +1475,19 @@ export function SimulationPage({
               ROOM 04: QR CODE SCANNER MOCKUP ("Scan Before You Trust")
              =================================================================== */}
           {scenarioId === 'sim-4' && (
-            <div className="bg-white border border-[#F0E7ED] rounded-2xl shadow-sm p-6 space-y-5">
+            <div className="bg-surface border border-line rounded-3xl shadow-sm p-6 space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                 {/* Left Poster */}
-                <div className="md:col-span-6 bg-[#FCFAFC] border border-[#F0E7ED] rounded-2xl p-5 text-center space-y-4">
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#D94F89]">
+                <div className="md:col-span-6 bg-canvas border border-line rounded-3xl p-5 text-center space-y-4">
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-brand">
                     Conference Room Notice
                   </div>
-                  <h3 className="text-base font-bold text-[#24212A]">
+                  <h3 className="text-base font-bold text-ink">
                     Mandatory Staff Wi-Fi Certificate Renewal
                   </h3>
 
                   {/* Safe SVG QR Matrix */}
-                  <div className="inline-block p-3 bg-white border-2 border-[#24212A] rounded-xl">
+                  <div className="inline-block p-3 bg-surface border-2 border-ink rounded-xl">
                     <svg
                       viewBox="0 0 120 120"
                       className="w-28 h-28"
@@ -1519,15 +1519,15 @@ export function SimulationPage({
                     }}
                     className={`w-full text-left p-3 rounded-xl border text-xs transition-all cursor-pointer ${
                       currentStepIndex === 1 && !taskCompletedInCurrentStep
-                        ? 'bg-[#FFF1F6] border-[#D94F89] ring-2 ring-[#D94F89]/25'
-                        : 'bg-white border-[#F0E7ED]'
+                        ? 'bg-blush border-brand ring-2 ring-brand/25'
+                        : 'bg-surface border-line'
                     }`}
                   >
-                    <p className="text-[#24212A] leading-relaxed">
+                    <p className="text-ink leading-relaxed">
                       “Do not use your laptop browser. Scan exclusively with your personal smartphone camera and sign in with your corporate password.”
                     </p>
                     {currentStepIndex >= 1 && (
-                      <div className="text-[#D94F89] font-semibold mt-1.5">
+                      <div className="text-brand font-semibold mt-1.5">
                         {isStepReached(2)
                           ? 'Notice Instruction Inspected ✓'
                           : 'Click to Inspect This Instruction'}
@@ -1538,10 +1538,10 @@ export function SimulationPage({
 
                 {/* Right Camera Viewfinder (Task 1 Target) */}
                 <div className="md:col-span-6 space-y-4">
-                  <div className="p-5 rounded-2xl bg-[#24212A] text-white space-y-4">
+                  <div className="p-5 rounded-3xl bg-ink text-white space-y-4">
                     <div className="flex items-center justify-between text-xs">
-                      <span className="font-semibold flex items-center gap-1.5 text-[#FCE4EE]">
-                        <Camera className="w-4 h-4 text-[#E879A8]" />
+                      <span className="font-semibold flex items-center gap-1.5 text-rose-soft">
+                        <Camera className="w-4 h-4 text-brand-soft" />
                         <span>Mobile Camera Preview</span>
                       </span>
                       <span className="font-mono text-[11px] text-slate-400">Safe Sandbox</span>
@@ -1555,7 +1555,7 @@ export function SimulationPage({
                         <button
                           type="button"
                           onClick={() => handleCompleteInvestigationTask('ev-4-qrdecode')}
-                          className="w-full py-3 px-4 rounded-xl bg-[#D94F89] hover:bg-[#C23B75] text-white text-xs font-semibold cursor-pointer shadow-sm"
+                          className="w-full py-3 px-4 rounded-xl bg-brand hover:bg-brand-strong text-white text-xs font-semibold cursor-pointer shadow-sm"
                         >
                           Scan QR Code with Camera Preview
                         </button>
@@ -1580,8 +1580,8 @@ export function SimulationPage({
                   </div>
 
                   {isStepReached(2) && (
-                    <div className="p-3.5 rounded-xl bg-[#FFF1F6] border border-[#FCE4EE] text-xs text-[#24212A] leading-relaxed">
-                      <strong className="text-[#D94F89]">Why it bans laptops:</strong> Telling you to use your personal phone moves you away from your work computer’s built-in security filters.
+                    <div className="p-3.5 rounded-xl bg-blush border border-rose-soft text-xs text-ink leading-relaxed">
+                      <strong className="text-brand">Why it bans laptops:</strong> Telling you to use your personal phone moves you away from your work computer’s built-in security filters.
                     </div>
                   )}
                 </div>
@@ -1593,12 +1593,12 @@ export function SimulationPage({
               ROOM 05: SUPPORT CHAT MOCKUP ("The Urgent IT Request")
              =================================================================== */}
           {scenarioId === 'sim-5' && (
-            <div className="bg-white border border-[#F0E7ED] rounded-2xl shadow-sm overflow-hidden">
+            <div className="bg-surface border border-line rounded-3xl shadow-sm overflow-hidden">
               {/* Task 1 Target: Chat Header & External Sender Profile */}
-              <div className="bg-[#FCFAFC] border-b border-[#F0E7ED] px-5 py-4 flex flex-wrap items-center justify-between gap-2">
+              <div className="bg-canvas border-b border-line px-5 py-4 flex flex-wrap items-center justify-between gap-2">
                 <div className="space-y-1">
-                  <div className="text-sm font-bold text-[#24212A] flex items-center gap-2">
-                    <MessageSquare className="w-4 h-4 text-[#D94F89]" />
+                  <div className="text-sm font-bold text-ink flex items-center gap-2">
+                    <MessageSquare className="w-4 h-4 text-brand" />
                     <span>Marcus Chen · IT Security Desk</span>
                   </div>
                   <button
@@ -1606,8 +1606,8 @@ export function SimulationPage({
                     onClick={() => handleCompleteInvestigationTask('ev-5-pretext')}
                     className={`text-left px-3 py-1 rounded-lg border font-mono text-xs transition-all cursor-pointer ${
                       currentStepIndex === 0 && !taskCompletedInCurrentStep
-                        ? 'bg-[#FFF1F6] border-[#D94F89] text-[#D94F89] font-semibold'
-                        : 'bg-white border-[#F0E7ED] text-[#D94F89]'
+                        ? 'bg-blush border-brand text-brand font-semibold'
+                        : 'bg-surface border-line text-brand'
                     }`}
                   >
                     External Guest Account · [ext-secops@partner-bridge.example.net] —{' '}
@@ -1617,8 +1617,8 @@ export function SimulationPage({
               </div>
 
               <div className="p-6 space-y-4">
-                <div className="p-4 rounded-2xl rounded-tl-xs bg-[#FCFAFC] border border-[#F0E7ED] text-sm text-[#24212A] space-y-1">
-                  <div className="text-xs font-semibold text-[#716B76]">
+                <div className="p-4 rounded-3xl rounded-tl-xs bg-canvas border border-line text-sm text-ink space-y-1">
+                  <div className="text-xs font-semibold text-muted">
                     Marcus Chen · 4:51 PM
                   </div>
                   <p className="leading-relaxed">
@@ -1656,8 +1656,8 @@ export function SimulationPage({
                       </p>
                     </button>
 
-                    <div className="p-4 rounded-2xl rounded-tl-xs bg-[#FFF1F6] border border-[#FCE4EE] text-sm text-[#24212A] space-y-1">
-                      <div className="text-xs font-semibold text-[#D94F89]">
+                    <div className="p-4 rounded-3xl rounded-tl-xs bg-blush border border-rose-soft text-sm text-ink space-y-1">
+                      <div className="text-xs font-semibold text-brand">
                         Marcus Chen · 4:52 PM
                       </div>
                       <p className="leading-relaxed">
@@ -1681,14 +1681,14 @@ export function SimulationPage({
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.25 }}
-          className="bg-white border border-[#F0E7ED] rounded-2xl p-6 sm:p-8 shadow-xs space-y-6"
+          className="bg-surface border border-line rounded-3xl p-6 sm:p-8 shadow-soft space-y-6"
         >
-          <div className="border-b border-[#F0E7ED] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="border-b border-line pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <div className="text-xs font-bold uppercase tracking-wider text-[#D94F89]">
+              <div className="text-xs font-bold uppercase tracking-wider text-brand">
                 Room Debrief &amp; Takeaway
               </div>
-              <h2 className="text-2xl font-bold text-[#24212A] mt-0.5">
+              <h2 className="text-2xl font-bold text-ink mt-0.5">
                 {room.revealSummary.keyLessonTitle}
               </h2>
             </div>
@@ -1696,7 +1696,7 @@ export function SimulationPage({
             <button
               type="button"
               onClick={() => navigate(`/learn/${savedFeedback.relatedModuleSlug}`)}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#FFF1F6] hover:bg-[#FCE4EE] text-xs font-semibold text-[#D94F89] cursor-pointer shrink-0"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blush hover:bg-rose-soft text-xs font-semibold text-brand cursor-pointer shrink-0"
             >
               <BookOpen className="w-3.5 h-3.5" />
               <span>Optional Deep Dive: {savedFeedback.attackTypeLabel}</span>
@@ -1706,16 +1706,16 @@ export function SimulationPage({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Warning Signs Found */}
             <div className="lg:col-span-6 space-y-3">
-              <h3 className="text-sm font-bold text-[#24212A]">
+              <h3 className="text-sm font-bold text-ink">
                 What Made This Scenario Suspicious
               </h3>
-              <ul className="space-y-2.5 text-sm text-[#24212A]">
+              <ul className="space-y-2.5 text-sm text-ink">
                 {room.revealSummary.suspiciousSignals.map((sig, i) => (
                   <li
                     key={i}
-                    className="p-3.5 rounded-xl bg-[#FCFAFC] border border-[#F0E7ED] flex items-start gap-3 leading-relaxed"
+                    className="p-3.5 rounded-xl bg-canvas border border-line flex items-start gap-3 leading-relaxed"
                   >
-                    <span className="w-5 h-5 rounded-full bg-[#FFF1F6] text-[#D94F89] font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="w-5 h-5 rounded-full bg-blush text-brand font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
                       {i + 1}
                     </span>
                     <span>{sig}</span>
@@ -1726,11 +1726,11 @@ export function SimulationPage({
 
             {/* How It Works & Safest Action */}
             <div className="lg:col-span-6 space-y-4">
-              <div className="p-5 rounded-xl bg-[#FCFAFC] border border-[#F0E7ED] space-y-2">
-                <h3 className="text-sm font-bold text-[#24212A]">
+              <div className="p-5 rounded-xl bg-canvas border border-line space-y-2">
+                <h3 className="text-sm font-bold text-ink">
                   How Attackers Use This Trick
                 </h3>
-                <p className="text-sm text-[#716B76] leading-relaxed">
+                <p className="text-sm text-muted leading-relaxed">
                   {room.revealSummary.keyLessonBody}
                 </p>
               </div>
@@ -1747,15 +1747,15 @@ export function SimulationPage({
                 </p>
               </div>
 
-              <div className="p-4 rounded-xl bg-[#FFF1F6] border border-[#FCE4EE] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <p className="text-xs text-[#24212A] leading-relaxed">
+              <div className="p-4 rounded-xl bg-blush border border-rose-soft flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <p className="text-xs text-ink leading-relaxed">
                   {room.nextRoomTeaser}
                 </p>
                 {nextRoomId ? (
                   <button
                     type="button"
                     onClick={() => navigate(`/experience/simulation/${nextRoomId}`)}
-                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#D94F89] hover:bg-[#C23B75] text-white text-xs font-semibold cursor-pointer shrink-0"
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-brand hover:bg-brand-strong text-white text-xs font-semibold cursor-pointer shrink-0"
                   >
                     <span>Next Room</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -1764,7 +1764,7 @@ export function SimulationPage({
                   <button
                     type="button"
                     onClick={() => navigate('/report')}
-                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#D94F89] hover:bg-[#C23B75] text-white text-xs font-semibold cursor-pointer shrink-0"
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-brand hover:bg-brand-strong text-white text-xs font-semibold cursor-pointer shrink-0"
                   >
                     <span>View My Report</span>
                     <ArrowRight className="w-3.5 h-3.5" />
