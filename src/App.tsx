@@ -7,11 +7,13 @@ import { SimulationPage } from './pages/SimulationPage.tsx';
 import { FeedbackPage } from './pages/FeedbackPage.tsx';
 import { LearningCentrePage } from './pages/LearningCentrePage.tsx';
 import { ReportPage } from './pages/ReportPage.tsx';
+import { LabsPage } from './pages/LabsPage.tsx';
 import { SessionStorageAdapter } from './lib/sessionStore.ts';
 import {
   SessionStateResponse,
   AssessmentSummary,
   SimulationFeedbackRecord,
+  LabResultRecord,
 } from './types/phishlens.ts';
 
 export default function App() {
@@ -94,7 +96,24 @@ export default function App() {
     setSession(updated);
   }, []);
 
+  const handleLabComplete = useCallback((result: LabResultRecord) => {
+    const updated = SessionStorageAdapter.saveLabResult(result);
+    setSession(updated);
+  }, []);
+
   const renderRoute = () => {
+    if (currentPath === '/labs' || currentPath.startsWith('/labs/')) {
+      const labId = currentPath.replace(/^\/labs\/?/, '').split('/')[0] || undefined;
+      return (
+        <LabsPage
+          labId={labId}
+          session={session}
+          onLabComplete={handleLabComplete}
+          navigate={navigate}
+        />
+      );
+    }
+
     if (currentPath === '/' || currentPath === '') {
       return <LandingPage session={session} navigate={navigate} />;
     }

@@ -7,6 +7,7 @@ import {
   PublicScenario,
   LearningModule,
   AttackCategory,
+  LabResultRecord,
 } from '../types/phishlens.ts';
 import {
   BASELINE_QUESTIONS,
@@ -49,6 +50,7 @@ function createFreshSession(): SessionStateResponse {
     inspectedEvidenceByScenario: {},
     roomTaskProgress: {},
     completedModuleSlugs: [],
+    labResults: {},
   };
 }
 
@@ -82,6 +84,8 @@ export class SessionStorageAdapter {
         inspectedEvidenceByScenario: parsed.inspectedEvidenceByScenario || {},
         roomTaskProgress: parsed.roomTaskProgress || {},
         completedModuleSlugs: Array.isArray(parsed.completedModuleSlugs) ? parsed.completedModuleSlugs : [],
+        labResults:
+          parsed.labResults && typeof parsed.labResults === 'object' ? parsed.labResults : {},
       };
     } catch {
       const fresh = createFreshSession();
@@ -171,6 +175,20 @@ export class SessionStorageAdapter {
         [feedback.scenarioId]: feedback,
       },
       currentStage: nextStage,
+    };
+    return this.saveSession(updated);
+  }
+
+  static saveLabResult(result: LabResultRecord): SessionStateResponse {
+    const current = this.loadSession();
+    const previous = current.labResults[result.labId];
+    const best =
+      previous && previous.score > result.score
+        ? { ...previous, attempts: previous.attempts + 1 }
+        : { ...result, attempts: (previous?.attempts ?? 0) + 1 };
+    const updated: SessionStateResponse = {
+      ...current,
+      labResults: { ...current.labResults, [result.labId]: best },
     };
     return this.saveSession(updated);
   }

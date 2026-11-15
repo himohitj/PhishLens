@@ -160,6 +160,33 @@ export function LandingPage({ session, navigate }: LandingPageProps) {
         </div>
       </section>
 
+      {/* Sandbox Labs callout */}
+      <section className="py-12 sm:py-14 px-4 sm:px-6 border-b border-[#F0E7ED] bg-[#1d1a24] text-[#ece8f1]">
+        <div className="max-w-[1380px] mx-auto grid lg:grid-cols-[1.3fr_1fr] gap-8 items-center">
+          <div className="space-y-3">
+            <div className="text-xs font-semibold text-[#f07aae] uppercase tracking-wider">New · Sandbox Labs</div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">A disposable workstation for every lesson.</h2>
+            <p className="text-sm text-[#c8c2d2] leading-relaxed max-w-2xl">
+              Each lab boots an isolated container in your browser, with its own mail client, web browser, file manager and forensic terminal.
+              Investigate headers, WHOIS records and file hashes, or click the bad link on purpose and watch what happens. The container has no network and no access to your data, and a reset wipes it.
+            </p>
+            <button
+              type="button"
+              onClick={() => navigate('/labs')}
+              className="mt-2 px-5 py-3 text-sm font-semibold text-white bg-[#D94F89] hover:bg-[#C23B75] rounded-lg cursor-pointer"
+            >
+              Launch a Sandbox Lab
+            </button>
+          </div>
+          <pre className="rounded-xl bg-[#0f0d13] border border-[#322c3d] p-5 text-xs font-mono text-[#c8c2d2] whitespace-pre-wrap">{`sam@corv-lt-0417:~$ whois corvane-finance.co
+Creation Date: 2026-11-14   <-- 2 days ago
+sam@corv-lt-0417:~$ file Shipping_Label.pdf.exe
+PE32+ executable (GUI) x86-64, for MS Windows
+sam@corv-lt-0417:~$ ping example.com
+ping: network egress is disabled inside PhishLens containers`}</pre>
+        </div>
+      </section>
+
       {/* How It Works + 5 Guided Learning Rooms Overview */}
       <section
         id="how-it-works"

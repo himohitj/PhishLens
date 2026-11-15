@@ -62,6 +62,27 @@ Instead of asking abstract trivia questions, PhishLens places learners inside **
 
 ---
 
+## Sandbox Labs: an isolated container for every lesson
+
+PhishLens Sandbox Labs (`/labs`) drop the learner into a **disposable virtual workstation that runs entirely in the browser**. Each lab boots a fresh container with its own Mail client, web Browser (with certificate viewer, password vault and page source), Files manager, forensic Terminal (`whois`, `dig`, `file`, `sha256sum`, `strings`, `intel`, `curl -I`, `expand`) and company Directory.
+
+| Lab | Attack family | What you practise |
+| --- | --- | --- |
+| The Urgent Wire | Business Email Compromise | Sender vs display name, Reply-To hijack, WHOIS age, out-of-band verification |
+| Shared With You | Credential harvesting (AiTM) | Hover previews, short-link expansion, reading hostnames right-to-left, certificates, password-vault mismatch |
+| Delivery Exception | Malicious attachment | Hidden double extensions, file magic, hashing and threat intel, macro detection |
+
+**How isolation works** (`src/sandbox/ContainerHost.tsx`):
+
+- `sandbox="allow-scripts"` only, so each container gets an **opaque origin** with no access to PhishLens cookies, `localStorage` or the parent DOM. Forms, popups, modals and top-level navigation are all denied.
+- A per-container **Content-Security-Policy** (`default-src 'none'; connect-src 'none'`) blocks every outbound request. The in-lab "internet" is a virtual DNS and web defined by the lab image, and anything else is dropped at the virtual firewall.
+- The host and guest talk only over a **private `MessagePort`** set up in a nonce-checked boot handshake. The guest reports *actions* (never typed values), and the host grades them with a pure, deterministic engine (`src/sandbox/engine.ts`).
+- Reset destroys the iframe and boots a clean image under a new container ID. If a learner triggers a trap, the compromise plays out only inside that container.
+
+Labs are pure data (`src/sandbox/labs/*.ts`). The guest runtime (`src/sandbox/runtime/`) is compiled by a small Vite plugin into one inline IIFE, because an opaque-origin frame cannot load module scripts from the app server.
+
+---
+
 ## Key Features
 
 ### 1. Five Multi-Step Interactive Simulation Rooms

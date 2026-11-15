@@ -212,4 +212,20 @@ export interface SessionStateResponse {
   inspectedEvidenceByScenario: Record<string, string[]>;
   roomTaskProgress: Record<string, number>;
   completedModuleSlugs: string[];
+  labResults: Record<string, LabResultRecord>;
+}
+
+export interface LabResultRecord {
+  labId: string;
+  labTitle: string;
+  containerId: string;
+  score: number;
+  outcome: 'secured' | 'contained' | 'incomplete' | 'compromised';
+  investigationDepth: number;
+  objectivesCompleted: number;
+  objectivesTotal: number;
+  trapsTriggered: string[];
+  durationSeconds: number;
+  attempts: number;
+  completedAt: string;
 }

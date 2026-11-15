@@ -22,6 +22,7 @@ export function AppShell({
   const [confirmResetOpen, setConfirmResetOpen] = useState(false);
 
   const isLanding = currentPath === '/';
+  const hideContextBar = isLanding || currentPath.startsWith('/labs');
   const resumePath = getResumeRouteForSession(session);
   const completedSimCount = session.completedScenarioIds.length;
   const hasStarted =
@@ -94,6 +95,20 @@ export function AppShell({
               Simulations
             </a>
             <a
+              href="/labs"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/labs');
+              }}
+              className={`hover:text-[#24212A] transition-colors whitespace-nowrap shrink-0 py-1 ${
+                currentPath.startsWith('/labs')
+                  ? 'text-[#24212A] font-semibold underline underline-offset-8 decoration-[#D94F89] decoration-2'
+                  : ''
+              }`}
+            >
+              Sandbox Labs
+            </a>
+            <a
               href="/learn"
               onClick={(e) => {
                 e.preventDefault();
@@ -137,7 +152,7 @@ export function AppShell({
       </header>
 
       {/* Compact Single-Row Guided Context Bar (Only on active workspace routes) */}
-      {!isLanding && (
+      {!hideContextBar && (
         <div className="border-b border-[#F0E7ED] bg-[#FFF1F6]/70">
           <div className="max-w-[1380px] mx-auto px-6 py-2 flex flex-wrap items-center justify-between gap-4 text-xs">
             {/* Left: Current Activity & Direct Manipulation Simulation Switcher */}

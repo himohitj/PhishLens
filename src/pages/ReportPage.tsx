@@ -13,6 +13,8 @@ import {
 import { SessionStateResponse } from '../types/phishlens.ts';
 import { CATEGORY_LABELS } from '../server/data.ts';
 import { exportPerformanceReportPdf } from '../lib/pdfExport.ts';
+import { LAB_IMAGES } from '../sandbox/labs/index.ts';
+import { OUTCOME_COPY } from '../sandbox/engine.ts';
 
 interface ReportPageProps {
   session: SessionStateResponse;
@@ -154,6 +156,37 @@ export function ReportPage({ session, navigate }: ReportPageProps) {
             Reported or verified out-of-band safely
           </div>
         </div>
+      </div>
+
+      {/* Sandbox lab results */}
+      <div className="bg-white border border-[#F0E7ED] rounded-2xl p-6 space-y-4 shadow-2xs">
+        <div className="flex items-center justify-between gap-4">
+          <h2 className="text-base font-bold text-[#24212A]">Sandbox Lab Investigations</h2>
+          <button type="button" onClick={() => navigate('/labs')} className="text-xs font-semibold text-[#D94F89] hover:underline cursor-pointer">
+            Open Sandbox Labs
+          </button>
+        </div>
+        {LAB_IMAGES.length > 0 && (
+          <div className="grid sm:grid-cols-3 gap-3">
+            {LAB_IMAGES.map((lab) => {
+              const r = session.labResults[lab.id];
+              return (
+                <div key={lab.id} className="rounded-xl border border-[#F0E7ED] p-4 space-y-1">
+                  <div className="text-[11px] font-mono text-[#716B76]">{lab.codename}</div>
+                  <div className="font-semibold text-sm text-[#24212A]">{lab.title}</div>
+                  {r ? (
+                    <div className="text-xs text-[#716B76]">
+                      <span className="font-mono text-[#24212A] text-lg font-bold">{r.score}</span>/100 · {OUTCOME_COPY[r.outcome].label}
+                      <div>{r.objectivesCompleted}/{r.objectivesTotal} objectives · depth {r.investigationDepth}%</div>
+                    </div>
+                  ) : (
+                    <div className="text-xs text-[#716B76]">Not attempted yet</div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* 12-Column Split: Behaviour Progress Chart + Strongest / Practice Areas */}
