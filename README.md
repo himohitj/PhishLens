@@ -38,10 +38,6 @@
   <p><em><strong>Landing hero:</strong> word-by-word headline reveal, drifting aurora backdrop, magnetic call-to-action buttons and a floating glass navigation bar.</em></p>
 </div>
 
-<div align="center">
-  <img src="./public/screenshots/hero-threat-scanner.jpg" alt="Interactive threat scanner revealing hidden phishing indicators" width="100%" />
-  <p><em><strong>Interactive threat scanner:</strong> a scan beam sweeps (or is dragged) down an ordinary-looking message to expose an X-ray layer of hidden evidence. Each indicator is logged live, the risk dial climbs, and a verdict lands. It cycles through an email, a fake sign-in page and a helpdesk chat.</em></p>
-</div>
 
 ---
 
