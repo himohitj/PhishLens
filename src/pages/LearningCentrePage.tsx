@@ -1,3 +1,4 @@
+import { PageHero } from '../components/ui/PageHero.tsx';
 import React, { useState, useEffect } from 'react';
 import {
   CheckCircle2,
@@ -42,15 +43,17 @@ export function LearningCentrePage({
   const isCompleted = session.completedModuleSlugs.includes(activeModule.slug);
 
   return (
-    <div className="flex-1 max-w-[1380px] w-full mx-auto px-6 py-6 space-y-6">
+    <div className="flex-1">
+      <PageHero eyebrow={`Visual threat guides · ${session.completedModuleSlugs.length} of ${modules.length} complete`} title="Spot the *signal* in the noise." subtitle="Annotated examples, before-and-after comparisons and quick knowledge checks for every attack family in PhishLens." />
+    <div className="max-w-[1240px] w-full mx-auto px-4 sm:px-6 py-10 space-y-6 stagger-children">
       {/* Top Visual Index Bar: Switch between concise visual topics in 1 click */}
-      <div className="bg-white border border-[#F0E7ED] rounded-2xl p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4 shadow-2xs">
+      <div className="bg-surface border border-line rounded-3xl p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4 shadow-soft">
         <div className="space-y-1">
-          <div className="text-xs font-bold text-[#D94F89]">
+          <div className="text-xs font-bold text-brand">
             Embedded Visual Threat Guides · Completed {session.completedModuleSlugs.length} of{' '}
             {modules.length}
           </div>
-          <h1 className="text-xl sm:text-2xl font-bold text-[#24212A]">
+          <h1 className="text-xl sm:text-2xl font-bold text-ink">
             Spot the Signal: Annotated Examples &amp; Before/After Comparisons
           </h1>
         </div>
@@ -67,10 +70,10 @@ export function LearningCentrePage({
                 onClick={() => navigate(`/learn/${m.slug}`)}
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
                   active
-                    ? 'bg-[#D94F89] text-white shadow-2xs'
+                    ? 'bg-brand text-white shadow-soft'
                     : done
                     ? 'bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100'
-                    : 'bg-[#FCFAFC] text-[#716B76] border border-[#F0E7ED] hover:text-[#24212A] hover:border-[#E879A8]'
+                    : 'bg-canvas text-muted border border-line hover:text-ink hover:border-brand-soft'
                 }`}
               >
                 {done && !active && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />}
@@ -85,13 +88,13 @@ export function LearningCentrePage({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* LEFT 7 COLUMNS: Annotated Visual Example & Before/After Comparison */}
         <div className="lg:col-span-7 space-y-5">
-          <div className="bg-white border border-[#F0E7ED] rounded-2xl p-6 space-y-4 shadow-2xs">
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#F0E7ED] pb-3">
+          <div className="bg-surface border border-line rounded-3xl p-6 space-y-4 shadow-soft">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line pb-3">
               <div>
-                <span className="text-xs font-mono text-[#D94F89] font-semibold">
+                <span className="text-xs font-mono text-brand font-semibold">
                   {activeModule.attackTypeLabel}
                 </span>
-                <h2 className="text-xl font-bold text-[#24212A] mt-0.5">
+                <h2 className="text-xl font-bold text-ink mt-0.5">
                   {activeModule.title}
                 </h2>
               </div>
@@ -99,7 +102,7 @@ export function LearningCentrePage({
               <button
                 type="button"
                 onClick={() => setShowAnnotatedReveal((prev) => !prev)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#FFF1F6] border border-[#FCE4EE] text-xs font-semibold text-[#D94F89] cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blush border border-rose-soft text-xs font-semibold text-brand cursor-pointer"
               >
                 <Eye className="w-3.5 h-3.5" />
                 <span>
@@ -108,26 +111,26 @@ export function LearningCentrePage({
               </button>
             </div>
 
-            <p className="text-sm text-[#716B76] leading-relaxed">
+            <p className="text-sm text-muted leading-relaxed">
               {activeModule.whatItIs}
             </p>
 
             {/* Annotated Before / After Example Box */}
-            <div className="rounded-xl border border-[#F0E7ED] bg-[#FCFAFC] p-4 space-y-3">
+            <div className="rounded-xl border border-line bg-canvas p-4 space-y-3">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-bold text-[#24212A]">
+                <span className="font-bold text-ink">
                   Annotated Scenario: {activeModule.fictionalExample.title}
                 </span>
-                <span className="text-[#716B76]">{activeModule.fictionalExample.context}</span>
+                <span className="text-muted">{activeModule.fictionalExample.context}</span>
               </div>
 
-              <pre className="p-3.5 rounded-xl bg-[#24212A] text-amber-300 font-mono text-xs whitespace-pre-wrap leading-relaxed overflow-x-auto">
+              <pre className="p-3.5 rounded-xl bg-ink text-amber-300 font-mono text-xs whitespace-pre-wrap leading-relaxed overflow-x-auto">
                 {activeModule.fictionalExample.artifactText}
               </pre>
 
               {showAnnotatedReveal && (
-                <div className="p-3.5 rounded-xl bg-[#FFF1F6] border border-[#FCE4EE] text-xs text-[#24212A] space-y-1">
-                  <div className="font-bold text-[#D94F89]">
+                <div className="p-3.5 rounded-xl bg-blush border border-rose-soft text-xs text-ink space-y-1">
+                  <div className="font-bold text-brand">
                     How to Read the Clues Above:
                   </div>
                   <p className="leading-relaxed">
@@ -139,17 +142,17 @@ export function LearningCentrePage({
 
             {/* Warning Signs Grid */}
             <div className="space-y-2.5">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-[#716B76]">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-muted">
                 Key Warning Signs
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {activeModule.warningSigns.map((w, idx) => (
                   <div
                     key={idx}
-                    className="p-3.5 rounded-xl bg-[#FCFAFC] border border-[#F0E7ED] space-y-1 text-xs"
+                    className="p-3.5 rounded-xl bg-canvas border border-line space-y-1 text-xs"
                   >
-                    <div className="font-bold text-[#24212A]">{w.signal}</div>
-                    <p className="text-[#716B76] leading-relaxed">{w.explanation}</p>
+                    <div className="font-bold text-ink">{w.signal}</div>
+                    <p className="text-muted leading-relaxed">{w.explanation}</p>
                   </div>
                 ))}
               </div>
@@ -160,8 +163,8 @@ export function LearningCentrePage({
         {/* RIGHT 5 COLUMNS: Safer Habits Comparison + 1-Question Interactive Check */}
         <div className="lg:col-span-5 space-y-5">
           {/* Do vs Don't Comparison */}
-          <div className="bg-white border border-[#F0E7ED] rounded-2xl p-5 space-y-4 shadow-2xs">
-            <h3 className="text-sm font-bold text-[#24212A]">
+          <div className="bg-surface border border-line rounded-3xl p-5 space-y-4 shadow-soft">
+            <h3 className="text-sm font-bold text-ink">
               Before / After Habit Comparison
             </h3>
 
@@ -199,9 +202,9 @@ export function LearningCentrePage({
           </div>
 
           {/* Quick Interactive Check */}
-          <div className="bg-white border border-[#F0E7ED] rounded-2xl p-5 space-y-3.5 shadow-2xs">
+          <div className="bg-surface border border-line rounded-3xl p-5 space-y-3.5 shadow-soft">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-[#D94F89]">
+              <span className="text-xs font-bold text-brand">
                 Quick Spot-Check (Marks Topic Complete)
               </span>
               {isCompleted && (
@@ -209,7 +212,7 @@ export function LearningCentrePage({
               )}
             </div>
 
-            <p className="text-xs font-semibold text-[#24212A] leading-snug">
+            <p className="text-xs font-semibold text-ink leading-snug">
               {activeModule.knowledgeCheck.question}
             </p>
 
@@ -231,7 +234,7 @@ export function LearningCentrePage({
                         ? opt.isCorrect
                           ? 'bg-emerald-50 border-emerald-400 text-emerald-950'
                           : 'bg-amber-50 border-amber-400 text-amber-950'
-                        : 'bg-[#FCFAFC] border-[#F0E7ED] hover:border-[#E879A8] text-[#24212A]'
+                        : 'bg-canvas border-line hover:border-brand-soft text-ink'
                     }`}
                   >
                     <div className="font-semibold">{opt.text}</div>
@@ -249,7 +252,7 @@ export function LearningCentrePage({
               <button
                 type="button"
                 onClick={() => onCompleteModule(activeModule.slug)}
-                className="px-3.5 py-2 rounded-xl bg-[#FFF1F6] hover:bg-[#FCE4EE] text-xs font-semibold text-[#D94F89] cursor-pointer"
+                className="px-3.5 py-2 rounded-xl bg-blush hover:bg-rose-soft text-xs font-semibold text-brand cursor-pointer"
               >
                 {isCompleted ? '✓ Completed' : 'Mark Topic Read'}
               </button>
@@ -257,7 +260,7 @@ export function LearningCentrePage({
               <button
                 type="button"
                 onClick={() => navigate('/report')}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#D94F89] hover:bg-[#C23B75] text-white text-xs font-semibold cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-brand hover:bg-brand-strong text-white text-xs font-semibold cursor-pointer"
               >
                 <span>Go to My Report</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -266,6 +269,7 @@ export function LearningCentrePage({
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
