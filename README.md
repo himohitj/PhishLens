@@ -118,12 +118,12 @@ Each lab boots a fresh **container**: a virtual desktop running entirely inside 
 
 <table>
   <tr>
-    <td width="50%"><img src="./public/screenshots/room-01-email.jpg" alt="Room 01: The Message That Can't Wait" /><p align="center"><em>Room 01 · Email inbox triage with a task bar, hints and Evidence Log</em></p></td>
-    <td width="50%"><img src="./public/screenshots/room-02-signin.jpg" alt="Room 02: The Suspicious Sign-In" /><p align="center"><em>Room 02 · Inspecting a decoy-prefixed SSO address bar</em></p></td>
+    <td width="50%"><img src="./public/screenshots/room-01-email.jpg" alt="Room 01: The Message That Can't Wait" /><p align="center"><em>Room 01 · Hunting for clues in a realistic mail client: each find drops a callout and is logged in the field notes</em></p></td>
+    <td width="50%"><img src="./public/screenshots/room-02-signin.jpg" alt="Room 02: The Suspicious Sign-In" /><p align="center"><em>Room 02 · Address bar unmasked, clues logged, and the decision panel open</em></p></td>
   </tr>
 </table>
 
-Every room follows the same loop: **Briefing → Task → Interact → Feedback → Reveal**. Each targets a high-impact vector and teaches one repeatable habit:
+Each room is a **clue hunt** inside a realistic interface: a mail client, a browser, a phone, a poster with a camera, or a workplace chat. With the **Inspect** lens on, you click the parts of the interface you'd check in real life (sender name, padlock, address bar, fee text, QR code, "External" badge). Real clues drop an anchored callout and are logged in your **field notes**; ordinary elements are reported as looking normal, so you can't tell the two apart by appearance. Hints point you to where to look. Switch to **Interact** and the interface behaves for real, so clicking the phishing button counts as clicking it. You can **make your call** at any time, from the field notes or through the interface itself (Report phishing, Sign in, Report Junk, chat replies). Each room targets a high-impact vector and teaches one repeatable habit:
 
 | Room | Title & Environment | Attack Vector | Interactive Clues to Inspect | Core Defensive Takeaway |
 | :--- | :--- | :--- | :--- | :--- |
@@ -133,7 +133,7 @@ Every room follows the same loop: **Briefing → Task → Interact → Feedback 
 | **Room 04** | **Scan Before You Trust**<br/>*Office Poster + Mobile Camera* | **Quishing**<br/>*(QR Code Channel-Shifting)* | • Decoded QR camera preview URL (`device-enroll-auth.example.net`)<br/>• Poster instruction urging staff *not* to use their work laptop<br/>• Absence of any internal IT ticket or intranet path | QR codes move users from protected laptops onto personal phones. Always inspect the camera's URL preview before opening a QR link. |
 | **Room 05** | **The Urgent IT Request**<br/>*Workplace Support Chat* | **Live Social Engineering**<br/>*(Authority Pretexting & OTP Theft)* | • `[External Guest Account]` sender badge<br/>• Pretexting with a real manager's name (*Elena Vance*)<br/>• Real-time SMS login OTP arriving while the agent asks for a "cancellation code" | Public org details (like manager names) don't prove identity, and no legitimate IT team will ever ask for your one-time passcode. |
 
-After each decision, the **debrief** compares your action with the safest response and lists every clue as `✓ Inspected` or `○ Uninspected`, with the raw technical value and a plain-English explanation.
+After each decision, the **debrief** shows an animated score, compares your call with the safest response, explains how the attack works, and lists every clue as **Found** or **Missed** with its raw technical value and a plain-English explanation.
 
 Room scenarios use reserved RFC 2606 domains (`.example.com`, `.example.net`, `.example.org`) and fictional personas.
 

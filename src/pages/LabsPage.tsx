@@ -11,6 +11,7 @@ import type { LabImage, SandboxEvent } from '../sandbox/types.ts';
 import type { LabResultRecord, SessionStateResponse } from '../types/phishlens.ts';
 import { Aurora, EASE_OUT_EXPO, Magnetic, Reveal, SplitText, SpotlightCard, Stagger, StaggerItem } from '../components/motion.tsx';
 import { Eyebrow } from '../components/ui/Eyebrow.tsx';
+import { ScoreRing } from '../components/ui/ScoreRing.tsx';
 
 interface LabsPageProps {
   labId?: string;
@@ -383,31 +384,6 @@ function IsolationCard() {
           </StaggerItem>
         ))}
       </Stagger>
-    </div>
-  );
-}
-
-function ScoreRing({ score, color }: { score: number; color: string }) {
-  const r = 52;
-  const c = 2 * Math.PI * r;
-  return (
-    <div className="relative w-36 h-36 shrink-0">
-      <svg viewBox="0 0 120 120" className="w-full h-full -rotate-90">
-        <circle cx="60" cy="60" r={r} fill="none" stroke="currentColor" strokeOpacity="0.12" strokeWidth="8" />
-        <motion.circle
-          cx="60" cy="60" r={r} fill="none" stroke={color} strokeWidth="8" strokeLinecap="round"
-          strokeDasharray={c}
-          initial={{ strokeDashoffset: c }}
-          animate={{ strokeDashoffset: c * (1 - score / 100) }}
-          transition={{ duration: 1.6, ease: EASE_OUT_EXPO, delay: 0.2 }}
-        />
-      </svg>
-      <div className="absolute inset-0 grid place-items-center">
-        <div className="text-center">
-          <div className="text-4xl font-semibold tabular-nums">{score}</div>
-          <div className="text-[11px] opacity-60 font-mono">/ 100</div>
-        </div>
-      </div>
     </div>
   );
 }
