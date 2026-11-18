@@ -39,8 +39,8 @@ export function AppShell({ currentPath, navigate, session, onResetSession, child
 
   const links = [
     { href: '/', label: 'Discover', active: isLanding },
-    { href: `/experience/simulation/${nextIncompleteSim}`, label: 'Rooms', active: currentPath.startsWith('/experience') },
     { href: '/labs', label: 'Sandbox Labs', active: currentPath.startsWith('/labs') },
+    { href: `/experience/simulation/${nextIncompleteSim}`, label: 'Rooms', active: currentPath.startsWith('/experience') },
     { href: '/learn', label: 'Learn', active: currentPath.startsWith('/learn') },
     { href: '/report', label: 'Report', active: currentPath === '/report' },
   ];
@@ -329,8 +329,8 @@ function Footer({ navigate, onReset }: { navigate: (p: string) => void; onReset:
             </div>
           </div>
           {col('Train', [
-            { label: 'Guided rooms', href: '/experience/simulation/sim-1' },
             { label: 'Sandbox labs', href: '/labs' },
+            { label: 'Guided rooms', href: '/experience/simulation/sim-1' },
             { label: 'Calibration check', href: '/experience/intro' },
           ])}
           {col('Learn', [
